@@ -1,0 +1,57 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import {
+  Dropdown,
+  DropdownButton,
+  DropdownContent,
+  DropdownNav,
+  DropdownMenu,
+} from "@components/dropdown";
+---
+
+<Layout title="Dropdown">
+  <div>
+    <Dropdown pos="left">
+      <DropdownButton title="Dropdown" />
+      <DropdownContent className="w-[300px]">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+      </DropdownContent>
+    </Dropdown>
+  </div>
+
+  <div>
+    <Dropdown pos="left">
+      <DropdownButton title="Dropdown Nav" />
+      <DropdownNav
+        items={[
+          { title: "Home", href: "#" },
+          { title: "About", href: "#" },
+          { title: "Services", href: "#" },
+          { title: "Contact", href: "#" },
+        ]}
+      />
+    </Dropdown>
+  </div>
+
+  <div>
+    <DropdownMenu
+      pos="left"
+      title="Dropdown Menu"
+      items={[
+        { title: "Home", href: "#" },
+        { title: "About", href: "#" },
+        { title: "Services", href: "#" },
+        { title: "Contact", href: "#" },
+      ]}
+    />
+  </div>
+
+  <div>
+    <Dropdown pos="left">
+      <DropdownButton title="Button" className="btn btn-default" />
+      <DropdownContent className="w-[300px]">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+      </DropdownContent>
+    </Dropdown>
+  </div>
+</Layout>

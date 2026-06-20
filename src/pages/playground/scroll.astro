@@ -1,0 +1,33 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Button from "../../components/button/Button.astro";
+---
+
+<Layout title="Scroll">
+  <div id="top">
+    <a href="#my-element" data-scroll>Simple HTML Link</a>
+  </div>
+
+  <div>
+    <Button
+      scroll={{
+        target: "#my-element",
+        offset: 50,
+        speed: 800,
+      }}
+    >
+      Scroll To Button
+    </Button>
+  </div>
+
+  <div
+    id="my-element"
+    class="p-20 bg-gray-200 flex items-center justify-center mt-200"
+  >
+    Scroll to me!
+  </div>
+
+  <Button style="outline" scroll="target:#top;"> Back to Top! </Button>
+
+  <div class="mb-100"></div>
+</Layout>

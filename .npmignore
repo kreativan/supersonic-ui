@@ -1,0 +1,8 @@
+*
+!dist/
+!src/js/
+!src/css/
+!src/components/
+!package.json
+!README.md
+!LICENSE

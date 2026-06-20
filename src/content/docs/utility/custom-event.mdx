@@ -1,0 +1,47 @@
+---
+title: Custom Event
+description: Learn how to use Supersonic's custom event utility to dispatch browser events.
+---
+
+Supersonic includes a small helper for dispatching custom browser events with payload data. This is useful when you want different parts of your app to react to a shared event without directly coupling them together.
+
+## Quick start
+
+Use `newCustomEvent()` to dispatch an event and pass data in the `detail` property.
+
+```html
+<script>
+  window.supersonic.init();
+
+  window.addEventListener('signup:completed', (event) => {
+    console.log(event.detail);
+  });
+
+  window.supersonic.utility.newCustomEvent('signup:completed', {
+    userId: 42,
+    status: 'ok'
+  });
+</script>
+```
+
+## Example
+
+```js
+window.supersonic.utility.newCustomEvent('supersonic:form-submitted', {
+  formId: 'contact-form'
+});
+```
+
+You can listen for the event with the standard browser API:
+
+```js
+window.addEventListener('supersonic:form-submitted', (event) => {
+  console.log(event.detail);
+});
+```
+
+## Notes
+
+- The event is dispatched on the `window` object.
+- The payload is available through `event.detail`.
+- The helper returns the dispatched `CustomEvent` instance so you can inspect it if needed.

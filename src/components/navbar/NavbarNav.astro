@@ -1,0 +1,24 @@
+---
+interface Props {
+  items: {
+    title: string;
+    href: string;
+    target?: string;
+    scroll?: string;
+    submenu?: {
+      title: string;
+      href: string;
+      target?: string;
+      scroll?: string;
+    }[];
+  }[];
+}
+
+import Menu from "../menu/Menu.astro";
+
+const { items } = Astro.props;
+---
+
+<div class="navbar-nav">
+  <Menu items={items} submenuType="dropdown" className="navbar-menu" />
+</div>

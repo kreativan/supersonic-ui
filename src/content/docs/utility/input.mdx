@@ -1,0 +1,42 @@
+---
+title: Input
+description: Learn how to use Supersonic's input helper for numeric-only fields.
+---
+
+Supersonic includes a set of helper utilities for working with form inputs.
+
+## onlyAllowNumbers()
+
+Restricts an input field to numeric characters only. This is useful for phone numbers, postal codes, age fields, and other numeric-only values.
+
+The helper removes any non-digit character from the input value as the user types. It is intended for lightweight client-side filtering and should not replace server-side validation.
+
+### Example
+
+```html
+<input id="zip-code" type="text" />
+
+<script>
+  window.supersonic.init();
+  window.supersonic.ui.onlyAllowNumbers('#zip-code');
+</script>
+```
+
+### Arguments
+
+| Argument | Type | Description |
+|---|---|---|
+| `elementSelector` | `string \| null` | Optional CSS selector for the input element. If omitted, the helper uses the current event target. |
+
+### Example on input
+
+```html
+<input id="age" type="text" />
+
+<script>
+  const input = document.getElementById('age');
+  input.addEventListener('input', () => {
+    window.supersonic.ui.onlyAllowNumbers('#age');
+  });
+</script>
+```

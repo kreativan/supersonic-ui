@@ -1,0 +1,61 @@
+---
+title: Scroll
+description: Enable smooth scrolling for elements with a `data-scroll` attribute.
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Scroll utility provides a small initializer to enable smooth scrolling for elements with a `data-scroll` attribute.
+
+You can preview the scroll functionality in the <a href="/playground/scroll" target="_blank">Playground</a>.
+
+
+## Options
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `target` | string | CSS selector for the scroll target (e.g. `#section`). If absent, the element's `href` is used. |
+| `offset` | number | Pixels to offset from the top after scroll (e.g. `80`). |
+| `speed` | number | Duration of the animated scroll in milliseconds. If `0` or omitted, native smooth scrolling is used. |
+
+## Examples
+
+<Tabs>
+	<TabItem label="HTML">
+```html
+<!-- Basic link with default smooth scroll -->
+ <a href="#my-section" data-scroll>
+   Go to section
+ </a>
+
+<!-- With options -->
+<a 
+  href="#my-section" 
+  data-scroll="target:#my-section;offset:80;speed:500;">
+  Go to section
+</a>
+```
+	</TabItem>
+
+	<TabItem label="Astro">
+```astro
+---
+import Button from "../../components/button/Button.astro";
+---
+<Button 
+  scroll={{
+    target: "#my-element",
+    offset: 50,
+    speed: 800,
+  }}
+>
+  Scroll To
+</Button>
+
+<!-- props as a string -->
+<Button scroll="target:#my-element;offset:100;speed:300">
+  Scroll To 
+</Button>
+```
+	</TabItem>
+</Tabs>
+

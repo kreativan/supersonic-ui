@@ -1,0 +1,36 @@
+---
+import "../assets/fonts/bricolage-grotesque.css";
+import "../assets/fonts/inter.css";
+import "../css/_main.css";
+
+import Sidebar from "./_Sidebar.astro";
+
+const { title } = Astro.props;
+---
+
+<html lang="en" class="overflow-x-hidden">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <title>{title}</title>
+    <script type="module" src="/src/js/init.js"></script>
+  </head>
+  <body class="overflow-x-hidden min-h-screen">
+    <div class="flex min-h-screen">
+      <div class="w-1/6 min-h-screen">
+        <div class="fixed left-0 bg-gray-100 h-screen w-1/6 py-5 px-10">
+          <Sidebar />
+        </div>
+      </div>
+      <div class="flex-1 min-h-screen bg-white">
+        <main class="py-10 space-y-10">
+          <div class="container space-y-10">
+            <h1 class="text-5xl mb-10">{title}</h1>
+            <slot />
+          </div>
+        </main>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,146 @@
+---
+title: Navbar
+description: The Navbar component provides a flexible navigation bar with support for logos, navigation menus, and action buttons. It includes optional sticky behavior for enhanced user experience.
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Navbar component provides a flexible navigation bar with support for logos, navigation menus, and action buttons. It includes optional sticky behavior for enhanced user experience.
+
+You can preview the Navbar component in action on the <a href="/playground/navbar" target="_blank">Playground</a>.
+
+<Tabs>
+  <TabItem label="Html">
+    ```html
+      <nav class="navbar">
+        <div class="navbar-logo">logo</div>
+        <div class="navbar-nav">
+          <ul class="navbar-menu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+        <div class="navbar-actions">actions</div>
+      </nav>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+    ---
+    import {
+      Navbar,
+      NavbarLogo,
+      NavbarNav,
+      NavbarActions,
+    } from "@components/navbar";
+    ---
+    <Navbar className="my-navbar" sticky={{threshold: 100, offset: 10}}>
+      <NavbarLogo> Logo </NavbarLogo>
+      <NavbarNav items={items} />
+      <NavbarActions>
+        <a href="/login" class="btn btn-primary">Login</a>
+      </NavbarActions>
+    </Navbar>
+    ```
+  </TabItem>
+</Tabs>
+
+## Components & Props
+
+Navbar component is made with multiple sub-components to provide flexibility and customization options.
+To cerate a navbar you need to use the following components:
+
+```astro
+---
+import {
+  Navbar,
+  NavbarLogo,
+  NavbarNav,
+  NavbarActions,
+} from "@components/navbar";
+---
+<Navbar>
+  <NavbarLogo> Logo </NavbarLogo>
+  <NavbarNav items={items} />
+  <NavbarActions> Actions </NavbarActions>
+</Navbar>
+```
+
+### Navbar
+To enable sticky behavior for the Navbar, use the sticky prop with the following options.
+
+```astro
+<Navbar className="my-navbar" sticky={{threshold: 100, offset: 10, stickyOnTop: false}}>
+  ...
+</Navbar>
+```
+
+| Prop Name     | Type     | Default | Description                                      |
+| --------------|----------|---------|--------------------------------------------------|
+| className    | string   |    -   | Additional CSS classes for custom styling.       |
+| sticky        | object    |  -  | Enables sticky behavior for the navbar.          |
+| sticky.threshold | number | 100 | Scroll distance before sticky activates in px |
+| sticky.offset | number | 0 | Top position when sticky in px |
+| sticky.stickyOnTop | boolean | false | Only sticky on scroll up |
+
+### Navbar Nav
+NavbarNav component accepts an array of navigation items via the `items` prop.
+
+```astro
+---
+const menu = [
+  { href: "#", title: "Home", class: "my-item" },
+  {
+    href: "#",
+    title: "Dropdown",
+    class: "my-dropdown",
+    submenu: [
+      { href: "#", title: "Option 1", class: "my-subitem" },
+      { href: "#", title: "Option 2", class: "my-subitem" },
+      { href: "#", title: "Option 3", class: "my-subitem" },
+    ],
+  },
+  { href: "#", title: "About", class: "my-item" },
+  { href: "#", title: "Services", class: "my-item" },
+  { href: "#", title: "Contact", class: "my-item" },
+];
+---
+<NavbarNav items={menu} />
+```
+| Prop     | Type     | Default | Description                                      |
+| --------------|----------|---------|--------------------------------------------------|
+| items         | array    |   []    | Array of navigation items. |
+| item.title   | string   |   -    | Title of the navigation item.                     |
+| item.href    | string   |   -    | URL of the navigation item.
+| item.target  | string   |   -    | Target attribute for the link.                     |
+| item.scroll | string    |  - | Scroll to specified target element,see scroll component documentation... |
+| ite.submenu | array | - | Array of submenu items with same structure as items. |
+
+### Navbar Logo
+Navbar logo does not accept any props. You can add your logo content as children.
+
+```astro
+<NavbarLogo> 
+  <a href="/">
+    <img src="/logo.png" alt="Logo" />
+  </a>
+</NavbarLogo>
+```
+
+### Navbar Actions
+Navbar actions component does not accept any props. You can add your action buttons or links as children
+```astro
+<NavbarActions>
+  <a href="/login" class="btn btn-primary">Login</a>
+</NavbarActions>
+```
+
+## Css Variables
+```css
+--navbar-height: 60px;
+--navbar-bg: #ffffff;
+--navbar-logo-width: 25%;
+--navbar-actions-width: 25%;
+--navbar-menu-gap: 30px;
+```

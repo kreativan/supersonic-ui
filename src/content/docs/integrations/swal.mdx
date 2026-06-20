@@ -1,0 +1,75 @@
+---
+title: SweetAlert (Swal)
+description: Learn how to integrate SweetAlert (Swal) using the Supersonic init() API.
+---
+
+Supersonic can load SweetAlert2 for you automatically when the library initializes. This is useful when you want to use `window.Swal` in your site without manually adding the CDN script yourself.
+
+## Quick start
+
+Call `supersonic.init()` once on your page:
+
+```html
+<script>
+  window.supersonic.init();
+</script>
+```
+
+If you are using the module entry point, the same pattern applies:
+
+```js
+import { init } from '/src/js/index.js';
+
+init();
+```
+
+## What happens when you initialize it
+
+When Supersonic starts, it will:
+
+- create a `<script>` tag for SweetAlert2 from the jsDelivr CDN
+- load it with `defer`
+- make `window.Swal` available once the script has finished loading
+- skip loading it again if SweetAlert2 is already present on the page
+
+## Example usage
+
+After initialization, you can use SweetAlert2 normally:
+
+```html
+<script>
+  window.supersonic.init();
+
+  window.addEventListener('DOMContentLoaded', () => {
+    window.Swal.fire({
+      title: 'Hello',
+      text: 'Supersonic loaded SweetAlert2 for you.',
+      icon: 'success'
+    });
+  });
+</script>
+```
+
+## Used by Supersonic Forms
+
+Supersonic Forms can also use SweetAlert2 for user feedback. When a form is initialized with `responseType: 'swal'`, the form submission flow will show alerts based on the server response:
+
+- success responses display a success modal
+- error responses display an error toast or error modal
+
+```js
+const form = new supersonic.newForm({
+  formId: 'contact-form',
+  submitButton: '#submit-btn',
+  ajaxUrl: '/api/contact',
+  responseType: 'swal'
+});
+```
+
+This behavior is handled by the form response pipeline after the AJAX request completes.
+
+## Notes
+
+- You do not need to add the SweetAlert2 CDN script manually when using Supersonic.
+- If `window.Swal` is already loaded, Supersonic will reuse it instead of injecting another script.
+- The initialization is designed to run automatically once the page is ready, so you normally only need to call `supersonic.init()` once.

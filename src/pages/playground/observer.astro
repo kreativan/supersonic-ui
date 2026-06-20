@@ -1,0 +1,28 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Observer">
+  <h1>Scroll to the bottom</h1>
+
+  <div id="my-element" style="margin:1500px 0 100px 0;">
+    This is the element observed by Intersection Observer.
+  </div>
+</Layout>
+
+<script type="module" is:inline>
+  window.addEventListener("DOMContentLoaded", () => {
+    supersonic.ui.observeElement({
+      selector: "#my-element",
+      threshold: 0.5,
+      repeat: true,
+      onEnter: (element, entry) => {
+        swal.fire({
+          title: "My Element",
+          text: "My element has been entered the viewport!",
+          icon: "info",
+        });
+      },
+    });
+  });
+</script>

@@ -1,0 +1,36 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import {
+  Navbar as NavbarComponent,
+  NavbarLogo,
+  NavbarNav,
+  NavbarActions,
+} from "@components/navbar";
+
+const menu = [
+  { href: "#", title: "Home" },
+  {
+    href: "#",
+    title: "Dropdown",
+    submenu: [
+      { href: "#", title: "Option 1" },
+      { href: "#", title: "Option 2" },
+      { href: "#", title: "Option 3" },
+    ],
+  },
+  { href: "#", title: "About" },
+  { href: "#", title: "Services" },
+  { href: "#", title: "Contact" },
+];
+---
+
+<Layout title="Navbar">
+  <NavbarComponent className="border-b border-t border-gray-200 bg-white">
+    <NavbarLogo> Logo </NavbarLogo>
+    <NavbarNav items={menu} />
+    <NavbarActions>
+      <a href="/login" class="btn btn-primary">Login</a>
+    </NavbarActions>
+  </NavbarComponent>
+</Layout>

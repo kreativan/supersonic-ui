@@ -1,0 +1,11 @@
+---
+interface Props {
+  multiple?: boolean;
+}
+
+const { multiple = false } = Astro.props;
+---
+
+<ul class="accordion" data-accordion={`multiple:${multiple};`}>
+  <slot />
+</ul>

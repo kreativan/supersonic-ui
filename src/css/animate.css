@@ -1,0 +1,103 @@
+:root {
+  --animate-duration: .8s;
+}
+
+[data-viewport-animation] {
+  opacity: 0;
+
+  &.in-view {
+    opacity: 1;
+  }
+}
+
+.animate {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-duration: var(--animate-duration);
+  animation-duration: var(--animate-duration);
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+}
+
+.fadeInLeft {
+  animation-name: fadeInLeft;
+}
+
+.fadeInRight {
+  animation-name: fadeInRight;
+}
+
+.fadeInTop {
+  animation-name: fadeInTop;
+}
+
+.fadeInBottom {
+  animation-name: fadeInBottom;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(100%) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes fadeInTop {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes fadeInBottom {
+  0% {
+    opacity: 0;
+    transform: translateY(100%) scale(0.9);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

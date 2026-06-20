@@ -1,0 +1,35 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Viewport Animations">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+    <div
+      data-viewport-animation="animation:fadeInTop; delay:300;"
+      class="bg-gray-200 p-4 rounded shadow flex items-center min-h-[200px]"
+    >
+      fadeInTop
+    </div>
+
+    <div
+      data-viewport-animation="animation:fadeInRight; delay:600;"
+      class="bg-gray-200 p-4 rounded shadow flex items-center min-h-[200px]"
+    >
+      fadeInRight
+    </div>
+
+    <div
+      data-viewport-animation="animation:fadeInLeft; delay:900;"
+      class="bg-gray-200 p-4 rounded shadow flex items-center min-h-[200px]"
+    >
+      fadeInLeft
+    </div>
+
+    <div
+      data-viewport-animation="animation:fadeInBottom; delay:1200;"
+      class="bg-gray-200 p-4 rounded shadow flex items-center min-h-[200px]"
+    >
+      fadeInBottom
+    </div>
+  </div>
+</Layout>

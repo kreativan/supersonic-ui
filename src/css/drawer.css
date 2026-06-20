@@ -1,0 +1,27 @@
+:root {
+  --drawer-bg: #ffffff;
+  --drawer-border: rgba(0, 0, 0, 0.1);
+  --drawer-width: 400px;
+  --drawer-padding: 20px;
+  --drawer-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.drawer {
+
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--drawer-width);
+  height: 100%;
+  background-color: var(--drawer-bg);
+  box-shadow: var(--drawer-shadow);
+  border-right: 1px solid var(--drawer-border);
+  transform: translateX(-100%);
+  z-index: 1000;
+
+  .drawer-content {
+    padding: var(--drawer-padding);
+  }
+
+}

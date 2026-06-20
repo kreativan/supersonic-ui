@@ -1,0 +1,11 @@
+---
+interface Props {
+  pos?: "left" | "center" | "right";
+}
+
+const { pos = "center" } = Astro.props;
+---
+
+<div class="dropdown" data-dropdown={pos}>
+  <slot />
+</div>

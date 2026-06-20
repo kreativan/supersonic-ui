@@ -1,0 +1,78 @@
+---
+title: Accordion
+description: Accordion component for collapsible content sections.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import AccordionExample from "@components/accordion/Example.astro";
+
+The Accordion component allows you to create collapsible content sections. By default, only one section can be open at a time, but you can allow multiple sections to be open simultaneously.
+
+You can add `data-accordion-close` to any element inside the accordion content to close the current section when clicked.
+
+<Tabs>
+  <TabItem label="Preview">
+    <AccordionExample />
+  </TabItem>
+  <TabItem label="Html">
+    ```html
+    <ul data-accordion="multiple:true|false;">
+      <li class="accordion-item">
+        <div class="accordion-title">
+          Title
+        </div>
+        <div class="accordion-content">
+          Content
+        </div>
+      <li>
+    </ul>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+      ---
+      import {
+        Accordion,
+        AccordionItem,
+        AccordionTitle,
+        AccordionContent,
+      } from "@components/accordion";
+      ---
+      <Accordion>
+        <AccordionItem>
+          <AccordionTitle>Accordion Item 1</AccordionTitle>
+          <AccordionContent>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus sequi hic
+              iste eveniet provident. At commodi, id veritatis aut aperiam eaque,
+              consequatur architecto odit voluptas doloremque excepturi animi magnam
+              quae?
+            </p>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    ```
+  </TabItem>
+</Tabs>
+
+## Props
+
+| Prop      | Type    | Default | Description |
+|-----------|---------|---------|-------------|
+| `multiple`| boolean | false   | Allows multiple accordion items to be open at the same time. |
+
+## CSS Variables
+
+The Accordion component utilizes the following CSS variables for customization:
+
+```css
+--accordion-font-size: 20px; /* Font size of the accordion title. */
+--accordion-padding: 15px; /* Padding inside the accordion title and content. */
+--accordion-border-radius: 5px; /* Border radius of the accordion elements. */
+--accordion-border-color: #ccc; /* Border color of the accordion elements. */
+--accordion-icon-size: 20px; /* Size of the accordion icon. */
+--accordion-transition-duration: 0.3s; /* Duration of the accordion animations. */
+--accordion-content-margin-top: 10px; /* Margin top of the accordion content. */      
+```
+
+Note: Dark mode overrides some variables when `[data-theme='dark']` is applied.

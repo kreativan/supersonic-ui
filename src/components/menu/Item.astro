@@ -1,0 +1,61 @@
+---
+import A from "./A.astro";
+import LI from "./LI.astro";
+import Menu from "./Menu.astro";
+import DropdownSVG from "@assets/svg/dropdown.svg";
+
+interface Props {
+  className?: string;
+  submenuType?: "submenu" | "dropdown" | undefined;
+  item: {
+    title?: string;
+    href?: string;
+    target?: string;
+    scroll?: string;
+    class?: string;
+    submenu?: {
+      title?: string;
+      href?: string;
+      target?: string;
+      scroll?: string;
+      class?: string;
+    }[];
+  };
+}
+
+const { item, submenuType, className = "menu-item" } = Astro.props;
+
+const isActive = Astro.url.pathname === item?.href;
+const hasSubmenu = item.submenu && item.submenu.length > 0 ? true : null;
+const isSubmenu = hasSubmenu && submenuType === "submenu" ? true : null;
+const isDropdown = hasSubmenu && submenuType === "dropdown" ? "center" : null;
+
+let cls = className;
+cls += item?.class ? ` ${item.class}` : "";
+---
+
+<LI
+  className={cls}
+  active={isActive}
+  isParent={isSubmenu}
+  isDropdown={isDropdown}
+>
+  <A
+    href={item?.href || ""}
+    title={item?.title || ""}
+    target={item?.target}
+    scroll={item?.scroll}
+  >
+    {item?.title || ""}
+    {hasSubmenu ? <DropdownSVG width="20" height="20" /> : null}
+  </A>
+  {
+    isSubmenu ? (
+      <Menu items={item.submenu!} className="submenu" />
+    ) : isDropdown ? (
+      <div class="dropdown-content" style="display: none;">
+        <Menu items={item.submenu!} className="dropdown-nav" />
+      </div>
+    ) : null
+  }
+</LI>

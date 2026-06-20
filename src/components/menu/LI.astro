@@ -1,0 +1,23 @@
+---
+interface Props {
+  active?: boolean;
+  className?: string;
+  isParent?: true | null;
+  isDropdown?: "center" | "left" | "right" | null;
+}
+
+const { active, className, isParent, isDropdown } = Astro.props;
+
+let cls = className;
+if (active) cls += " active";
+if (isParent) cls += " parent";
+if (isDropdown) cls += ` dropdown dropdown-${isDropdown}`;
+---
+
+<li
+  class={cls}
+  data-submenu={isParent ? true : null}
+  data-dropdown={isDropdown ? isDropdown : null}
+>
+  <slot />
+</li>

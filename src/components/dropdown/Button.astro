@@ -1,0 +1,36 @@
+---
+import DropdownSVG from "@assets/svg/dropdown.svg";
+
+interface Props {
+  title?: string;
+  className?: string;
+  iconSize?: number;
+  tag?: "button" | "a" | "li";
+}
+
+const {
+  title,
+  className = "cursor-pointer",
+  iconSize = 18,
+  tag = "button",
+} = Astro.props;
+---
+
+{
+  tag == "button" ? (
+    <button type="button" class={className}>
+      {Astro.slots.has("default") ? <slot /> : title}
+      <DropdownSVG width={iconSize} height={iconSize} />
+    </button>
+  ) : tag == "a" ? (
+    <a href="#" class={className}>
+      {Astro.slots.has("default") ? <slot /> : title}
+      <DropdownSVG width={iconSize} height={iconSize} />
+    </a>
+  ) : tag == "li" ? (
+    <li class={className}>
+      {Astro.slots.has("default") ? <slot /> : title}
+      <DropdownSVG width={iconSize} height={iconSize} />
+    </li>
+  ) : null
+}

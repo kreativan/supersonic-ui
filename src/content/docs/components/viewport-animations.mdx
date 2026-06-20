@@ -1,0 +1,54 @@
+---
+title: Viewport Animations
+description: Viewport animations allow elements to animate into view as they enter the viewport, enhancing user engagement and visual appeal.
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Viewport animations allow elements to animate into view as they enter the viewport, enhancing user engagement and visual appeal.
+
+<Tabs>
+  <TabItem label="Preview">
+    <div
+      data-viewport-animation="animation:fadeInTop; delay:200;"
+      class="bg-gray-200 p-4 rounded shadow flex items-center min-h-[50px] dark:text-black"
+    >
+      fadeInTop
+    </div>
+
+    <div
+      data-viewport-animation="animation:fadeInRight; delay:400;"
+      class="bg-gray-200 p-4 rounded shadow flex items-center min-h-[50px] dark:text-black"
+    >
+      fadeInRight
+    </div>
+
+    <div
+      data-viewport-animation="animation:fadeInLeft; delay:600;"
+      class="bg-gray-200 p-4 rounded shadow flex items-center min-h-[50px] dark:text-black"
+    >
+      fadeInLeft
+    </div>
+
+    <div
+      data-viewport-animation="animation:fadeInBottom; delay:800;"
+      class="bg-gray-200 p-4 rounded shadow flex items-center min-h-[50px] dark:text-black"
+    >
+      fadeInBottom
+    </div>
+  </TabItem>
+  <TabItem label="HTML">
+    ```html
+    <div data-viewport-animation="animation:fadeInBottom; delay: 300; duration: 1000;">
+      Content
+    </div>
+    ```
+  </TabItem>
+
+</Tabs>
+
+## Parameters
+| Parameter               | Type    | Default | Description                                                |
+|-------------------------|---------|---------|------------------------------------------------------------|
+| `animation`               | `String`  | `none`    | Type of animation to apply (e.g., fadeInTop, fadeInRight).    |
+| `delay`                   | `Number`  | `0`       | Delay in milliseconds before the animation starts.            |
+| `duration`                | `Number`  | `1000`    | Duration in milliseconds of the animation effect.              |  

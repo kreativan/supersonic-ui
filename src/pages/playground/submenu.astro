@@ -1,0 +1,39 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import SubMenu from "../../components/submenu/Submenu.astro";
+
+const items = [
+  {
+    title: "Item 1",
+    href: "#",
+    submenu: [
+      {
+        title: "Subitem 1-1",
+        href: "#",
+      },
+      {
+        title: "Subitem 1-2",
+        href: "#",
+      },
+    ],
+  },
+  {
+    title: "Item 2",
+    href: "#",
+    submenu: [
+      {
+        title: "Subitem 2-1",
+        href: "#",
+      },
+      {
+        title: "Subitem 2-2",
+        href: "#",
+      },
+    ],
+  },
+];
+---
+
+<Layout title="Submenu">
+  <SubMenu items={items} className="submenu-nav" />
+</Layout>

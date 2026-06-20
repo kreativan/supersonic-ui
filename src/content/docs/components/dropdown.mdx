@@ -1,0 +1,145 @@
+---
+title: Dropdown
+description: Dropdown component for displaying collapsible content menus.
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import { Dropdown, DropdownButton, DropdownContent, DropdownNav, DropdownMenu } from "@components/dropdown";
+
+The Dropdown component provides interactive dropdown menus that can be triggered by buttons or links. It supports various positioning options and can contain custom content or navigation items.
+
+<Tabs>
+  <TabItem label="Preview">
+    <Dropdown pos="left">
+      <DropdownButton title="Dropdown" />
+      <DropdownContent className="w-[300px]">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+      </DropdownContent>
+    </Dropdown>
+  </TabItem>
+  <TabItem label="Html">
+    ```html
+      <div class="dropdown" data-dropdown>
+        <a href="#" class="btn btn-default">
+          Dropdown <svg></svg>
+        </a>
+        <div>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+        </div>
+      </div>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+    ---
+    import { 
+      Dropdown, 
+      DropdownButton, 
+      DropdownContent 
+      } from "@components/dropdown";
+    ---
+    <Dropdown pos="left">
+      <DropdownButton title="Dropdown" />
+      <DropdownContent className="w-[300px]">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod.
+      </DropdownContent>
+    </Dropdown>
+    ```
+  </TabItem>
+</Tabs>
+
+## Nav & Menu
+
+<Tabs>
+  <TabItem label="Preview">
+    <DropdownMenu 
+      pos="left"
+      title="Dropdown Menu"
+      items={[
+        { title: "Home", href: "#" },
+        { title: "About", href: "#" },
+        { title: "Services", href: "#" },
+        { title: "Contact", href: "#" },
+      ]} 
+    />
+  </TabItem>
+
+  <TabItem label="Html">
+    ```html
+      <div class="dropdown" data-dropdown>
+        <a href="#" class="btn btn-default">
+          Dropdown <svg></svg>
+        </a>
+        <div>
+          <ul class="dropdown-nav">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Services</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+    ---
+    import { Dropdown, DropdownButton, DropdownNav } from "@components/dropdown";
+    ---
+    <Dropdown pos="left">
+      <DropdownButton title="Dropdown Nav" />
+      <DropdownNav 
+        items={[
+          { title: "Home", href: "#" },
+          { title: "About", href: "#" },
+          { title: "Services", href: "#" },
+          { title: "Contact", href: "#" },
+        ]} 
+      />
+    </Dropdown>
+    ```
+  </TabItem>
+
+  <TabItem label="Menu">
+    ```astro
+    ---
+    import { DropdownMenu } from "@components/dropdown";
+    ---
+    <DropdownMenu 
+      title="Dropdown Menu"
+      items={[
+        { title: "Home", href: "#" },
+        { title: "About", href: "#" },
+        { title: "Services", href: "#" },
+        { title: "Contact", href: "#" },
+      ]} 
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+## Props
+
+| Prop      | Type   | Values | Description |
+|-----------|--------|---------|-------------|
+| `pos` | string | left/right/center      | Position of the dropdown content relative to the trigger. |
+| `title` | string | -       | Title text for the dropdown button. |
+| `items` | array  | href, title, target  | Array of navigation items for DropdownNav and DropdownMenu components. |
+| `className` | string | -       | Additional CSS classes for custom styling. |
+| `tag` | string | button/a/li | HTML tag to use for the dropdown trigger element. |
+
+## CSS Variables
+
+The Dropdown component utilizes the following CSS variables for customization:
+
+```css
+--dropdown-bg: #ffffff; /* Background color of the dropdown content. */
+--dropdown-border: rgba(0, 0, 0, 0.1); /* Border color of the dropdown content. */
+--dropdown-border-radius: 5px; /* Border radius of the dropdown content. */
+--dropdown-padding: 10px; /* Padding inside the dropdown content. */
+--dropdown-margin-top: 10px; /* Margin top of the dropdown content. */
+
+--dropdown-nav-width: 200px; /* Width of the dropdown navigation. */
+--dropdown-nav-item-color: #231818; /* Text color of navigation items. */
+--dropdown-nav-item-hover-bg: #f5f5f5; /* Background color on hover for navigation items. */
+--dropdown-nav-item-padding: 5px 12px; /* Padding for navigation items. */
+```

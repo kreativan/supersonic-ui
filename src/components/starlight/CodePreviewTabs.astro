@@ -1,0 +1,18 @@
+---
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+const { component, label = "HTML" } = Astro.props;
+---
+
+<Tabs>
+  <TabItem label="Preview">
+    {
+      (() => {
+        const Preview = component;
+        return <Preview />;
+      })()
+    }
+  </TabItem>
+  <TabItem label={label}>
+    <slot />
+  </TabItem>
+</Tabs>

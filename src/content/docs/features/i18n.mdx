@@ -1,0 +1,102 @@
+---
+title: i18n
+description: Learn how to use Supersonic's internationalization (i18n) features.
+---
+
+Supersonic includes a lightweight i18n helper that lets you provide translated strings through the initialization options and reuse them across the library.
+
+## Quick start
+
+Pass your translations to `supersonic.init()` using the `i18n` option:
+
+```html
+<script>
+  window.supersonic.init({
+    i18n: {
+      required_field: 'This field is required',
+      invalid_email: 'Please enter a valid email address',
+      ok: 'OK'
+    }
+  });
+</script>
+```
+
+If you are using the module entry point, the same pattern applies:
+
+```js
+import { init } from '/src/js/index.js';
+
+init({
+  i18n: {
+    required_field: 'This field is required',
+    invalid_email: 'Please enter a valid email address',
+    ok: 'OK'
+  }
+});
+```
+
+## How it works
+
+Supersonic stores the provided object on `window.supersonic.i18n` during initialization. The `i18n()` helper then looks up a key in that object and falls back to the default value or the key itself when no translation is available.
+
+```js
+window.supersonic.init({
+  i18n: {
+    required_field: 'Campo obligatorio'
+  }
+});
+
+window.supersonic.utility.i18n?.('required_field', 'This field is required');
+```
+
+## Translation keys used by Supersonic
+
+The current implementation is used by the following parts of the library:
+
+- form validation messages such as `required_field` and `invalid_email`
+- SweetAlert confirmation buttons via `ok`
+
+### Example
+
+```js
+window.supersonic.init({
+  i18n: {
+    required_field: 'Este campo es obligatorio',
+    invalid_email: 'Introduce una dirección de correo válida',
+    ok: 'Aceptar'
+  }
+});
+```
+
+## Usage in forms
+
+Form validation uses the i18n helper automatically. When a field is required or an email value is invalid, Supersonic will display the translated message from your `i18n` configuration.
+
+```html
+<form id="contact-form">
+  <input type="text" name="name" required>
+  <input type="email" name="email" required>
+  <button type="submit">Send</button>
+</form>
+
+<script>
+  window.supersonic.init({
+    i18n: {
+      required_field: 'Campo obligatorio',
+      invalid_email: 'Correo inválido'
+    }
+  });
+
+  window.supersonic.newForm({
+    formId: 'contact-form',
+    submitButton: '#submit-btn',
+    ajaxUrl: '/api/contact'
+  });
+</script>
+```
+
+## Notes
+
+- If a translation key is missing, Supersonic falls back to the provided default value.
+- You can use interpolation placeholders in your translations, for example `{name}`.
+- The helper is available through the Supersonic runtime object once initialization has run.

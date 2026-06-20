@@ -1,0 +1,92 @@
+---
+title: Submenu
+description: Accordion-style submenu component for navigation menus with mobile-friendly toggle functionality.
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import SubMenu from '@components/submenu/Submenu.astro';
+
+The Submenu component provides accordion-style navigation for nested menu items, ideal for mobile menus or compact navigation structures.
+
+<Tabs>
+  <TabItem label="Preview">
+    <SubMenu 
+      className="submenu-nav" 
+      items={[
+        {
+          title: "Item",
+          href: "#",
+          target: "_self",
+          scroll: false,
+          submenu: [
+            { title: "Subitem 1", href: "#" },
+            { title: "Subitem 2", href: "#" },
+          ],
+        },
+        {
+          title: "Another Item",
+          href: "#",
+          target: "_self",
+          scroll: false,
+          submenu: [
+            { title: "Subitem A", href: "#" },
+            { title: "Subitem B", href: "#" },
+          ],
+        },  
+        {
+          title: "Third Item",
+          href: "#",
+          target: "_self",
+          scroll: false,
+          submenu: [
+            { title: "Subitem X", href: "#" },
+            { title: "Subitem Y", href: "#" },
+          ],
+        }
+      ]} 
+    />
+  </TabItem>
+  <TabItem label="HTML">
+    ```html
+    <li data-submenu>
+      <a href="#">
+        Menu Item Title
+        <svg><!-- Optional icon that rotates --></svg>
+      </a>
+      <ul>
+        <li><a href="#">Submenu Link 1</a></li>
+        <li><a href="#">Submenu Link 2</a></li>
+      </ul>
+    </li>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+    ---
+    import SubMenu from "../../components/submenu/Submenu.astro";
+
+    const items = [
+      {
+        title: "Menu Item Title",
+        href: "#",
+        target: "_self",
+        scroll: false,
+        submenu: [
+          { title: "Submenu Link 1", href: "#" },
+          { title: "Submenu Link 2", href: "#" },
+        ],
+      },
+    ];
+    ---
+    <SubMenu 
+      items={items} 
+      className="submenu-nav" 
+    />
+    ```
+  </TabItem>
+</Tabs>
+
+## Props
+| Prop Name    | Type            | Default       | Description                                         |
+|--------------|-----------------|---------------|-----------------------------------------------------|
+| items        | Array           | []            | Array of menu items with optional nested submenus.    |
+| className    | String          | ""            | Additional CSS classes for custom styling.              |

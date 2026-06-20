@@ -1,0 +1,26 @@
+---
+import Item from "./Item.astro";
+
+interface Props {
+  submenuType?: "submenu" | "dropdown" | undefined;
+  items: {
+    title?: string;
+    href?: string;
+    target?: string;
+    scroll?: string;
+    submenu?: {
+      title?: string;
+      href?: string;
+      target?: string;
+      scroll?: string;
+    }[];
+  }[];
+  className?: string;
+}
+
+const { items, className, submenuType } = Astro.props;
+---
+
+<ul class={className}>
+  {items.map((item) => <Item item={item} submenuType={submenuType} />)}
+</ul>

@@ -1,0 +1,55 @@
+---
+title: Cookies
+description: Learn how to use Supersonic's cookie helpers to store and read values.
+---
+
+Supersonic provides simple cookie helpers for setting and getting browser cookies.
+
+## Quick start
+
+Use `setCookie()` to store a value and `getCookie()` to read it later.
+
+```html
+<script>
+  window.supersonic.init();
+
+  window.supersonic.utility.setCookie('visited', 'true', 30);
+  const visited = window.supersonic.utility.getCookie('visited');
+
+  console.log(visited);
+</script>
+```
+
+## Set a cookie
+
+```js
+window.supersonic.utility.setCookie('theme', 'dark', 7, {
+  path: '/',
+  sameSite: 'Lax',
+  secure: true
+});
+```
+
+| Argument | Type | Description |
+|---|---|---|
+| `name` | `string` | The cookie name to store. |
+| `value` | `string` | The cookie value to store. |
+| `days` | `number` | Number of days before the cookie expires. Leave empty or `0` for a session cookie. |
+| `options` | `object` | Optional settings such as `path`, `sameSite`, and `secure`. |
+
+## Read a cookie
+
+```js
+const theme = window.supersonic.utility.getCookie('theme');
+```
+
+| Argument | Type | Description |
+|---|---|---|
+| `name` | `string` | The cookie name to read from the browser. |
+
+## Notes
+
+- The helper uses `document.cookie` under the hood.
+- The `days` argument controls the expiration time.
+- By default, cookies are created with the current path and a `SameSite=Lax` policy.
+- `secure` is enabled automatically when the page is served over HTTPS.

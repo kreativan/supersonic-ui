@@ -1,0 +1,15 @@
+---
+const { id, className, container = true } = Astro.props;
+---
+
+<section id={id} class="section" class:list={className}>
+  {
+    container ? (
+      <div class="container">
+        <slot />
+      </div>
+    ) : (
+      <slot />
+    )
+  }
+</section>

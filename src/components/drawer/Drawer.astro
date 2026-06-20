@@ -1,0 +1,16 @@
+---
+interface Props {
+  id: string;
+  overlay?: "true" | "false";
+  className?: string;
+}
+
+const { id, overlay = "true", className } = Astro.props;
+
+let cls = "drawer";
+if (className) cls += ` ${className}`;
+---
+
+<div class={cls} data-drawer={id} data-drawer-overlay={overlay}>
+  <slot />
+</div>

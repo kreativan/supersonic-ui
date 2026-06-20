@@ -1,0 +1,30 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Button from "@components/button/Button.astro";
+---
+
+<Layout title="Button">
+  <div class="space-x-5">
+    <Button style="default" size="md" title="Default Button"> Default </Button>
+    <Button style="primary" size="md" title="Primary Button"> Primary </Button>
+    <Button style="secondary" size="md" title="Secondary Button">
+      Secondary
+    </Button>
+    <Button style="outline" size="md" title="Outline Button"> Outline </Button>
+    <Button style="danger" size="md" title="Danger Button"> Danger </Button>
+    <Button
+      style="primary"
+      size="md"
+      title="Rounded Button"
+      className="btn-rounded"
+    >
+      Rounded
+    </Button>
+  </div>
+
+  <div class="space-x-5">
+    <Button style="primary" size="sm" title="Small" />
+    <Button style="primary" size="md" title="Medium" />
+    <Button style="primary" size="lg" title="Large" />
+  </div>
+</Layout>

@@ -1,0 +1,65 @@
+---
+title: Google Tag Manager (GTM)
+description: Learn how to integrate Google Tag Manager (GTM) using the Supersonic init() API.
+---
+
+Supersonic can load Google Tag Manager automatically for you. The integration is enabled by passing your GTM container ID to the `gtm` option when you initialize the library.
+
+## Quick start
+
+Call `supersonic.init()` once on your page and provide your GTM container ID:
+
+```html
+<script>
+  window.supersonic.init({
+    gtm: 'GTM-XXXXXXX'
+  });
+</script>
+```
+
+If you are using the module entry point, the same pattern applies:
+
+```js
+import { init } from '/src/js/index.js';
+
+init({
+  gtm: 'GTM-XXXXXXX'
+});
+```
+
+## What happens when you initialize it
+
+When `gtm` is provided, Supersonic will:
+
+- validate that the value looks like a GTM container ID
+- create the `window.dataLayer` array if it does not already exist
+- inject the GTM script into the page head
+- inject the noscript iframe fallback into the page body
+
+The expected format is:
+
+```text
+GTM-ABC1234
+```
+
+It must match the pattern `GTM-[A-Z0-9]+`.
+
+## Example with other options
+
+You can initialize GTM together with the other Supersonic options:
+
+```html
+<script>
+  window.supersonic.init({
+    gtm: 'GTM-XXXXXXX',
+    lang: 'en',
+    i18n: {}
+  });
+</script>
+```
+
+## Notes
+
+- If no `gtm` value is provided, Supersonic skips the GTM integration.
+- If the ID is missing or invalid, the library logs an error and does not inject the tags.
+- The initialization is designed to run automatically once the page is ready, so you normally only need to call `supersonic.init()` once.

@@ -1,0 +1,65 @@
+---
+title: Section
+description: A simple layout wrapper component for creating content sections with a centered container.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Section from '@components/section/Section.astro';
+
+The Section component provides a simple semantic wrapper for page sections. It renders a `<section>` element with the `.section` class and optionally wraps its content in a `.container` for consistent spacing and alignment.
+
+<Tabs>
+  <TabItem label="Preview">
+    <Section id="intro-section" className="bg-slate-50">
+      <h2 class="text-2xl font-semibold">Welcome</h2>
+      <p class="mt-2">Use sections to group related content and keep layouts consistent.</p>
+    </Section>
+
+    <Section id="full-width-section" container={false} className="mt-6 bg-slate-100">
+      <div class="px-6 py-4">
+        <h3 class="text-xl font-semibold">Full-width content</h3>
+        <p class="mt-2">Set <code>container={"false"}</code> to render the section without the inner container.</p>
+      </div>
+    </Section>
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+    ---
+    import Section from '@components/section/Section.astro';
+    ---
+
+    <Section id="intro-section" className="my-8">
+      <h2>Welcome</h2>
+      <p>Use sections to group related content.</p>
+    </Section>
+
+    <Section id="full-width-section" container={false} className="my-8">
+      <div>Full-width content</div>
+    </Section>
+    ```
+  </TabItem>
+  <TabItem label="Html">
+    ```html
+    <section id="intro-section" class="section">
+      <div class="container">
+        <h2>Welcome</h2>
+        <p>Use sections to group related content.</p>
+      </div>
+    </section>
+    ```
+  </TabItem>
+</Tabs>
+
+## Props
+
+| Prop | Type | Description |
+| --- | --- | --- |
+| `id` | string | Optional id applied to the `<section>` element. |
+| `className` | string | Additional CSS classes applied to the section. |
+| `container` | boolean | Controls whether the component renders an inner `.container` wrapper. Defaults to `true`. |
+
+## Usage
+
+Wrap related content in a Section component to create a clear page block with consistent container-based layout. The component is especially useful for landing pages, about sections, feature groups, and content blocks.
+
+Use `container={false}` when you want the section to span the full available width without the inner content wrapper.

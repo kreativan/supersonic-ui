@@ -1,0 +1,62 @@
+---
+interface Props {
+  href?: string;
+  title?: string;
+  target?: string;
+  style?: string;
+  size?: string;
+  rounded?: boolean;
+  className?: string;
+  scroll?: object | string;
+}
+
+const {
+  href,
+  title,
+  target,
+  style = "default",
+  size = "md",
+  rounded = false,
+  className = "",
+  scroll = null,
+} = Astro.props;
+
+let cls = "btn";
+cls += ` btn-${style}`;
+cls += ` btn-${size}`;
+
+if (rounded) cls += " btn-rounded";
+if (className) cls += ` ${className}`;
+
+let scrollOptions = scroll;
+
+if (scroll && typeof scroll === "object") {
+  scrollOptions = Object.entries(scroll)
+    .map(([key, value]) => `${key}:${value}`)
+    .join(";");
+}
+---
+
+{
+  href ? (
+    <a
+      href={href}
+      title={title}
+      target={target}
+      rel={target == "_blank" ? "noopener noreferrer nofollow" : null}
+      class={cls}
+      data-scroll={scrollOptions}
+    >
+      {Astro.slots.has("default") ? <slot /> : title}
+    </a>
+  ) : (
+    <button
+      type="button"
+      class={`btn btn-${style} btn-${size} ${className}`}
+      title={title}
+      data-scroll={scrollOptions}
+    >
+      {Astro.slots.has("default") ? <slot /> : title}
+    </button>
+  )
+}

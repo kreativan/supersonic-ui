@@ -1,0 +1,12 @@
+---
+import Dropdown from "./Dropdown.astro";
+import Button from "./Button.astro";
+import Nav from "./Nav.astro";
+
+const { title, items, pos = "left" } = Astro.props;
+---
+
+<Dropdown pos={pos}>
+  <Button title={title} />
+  <Nav items={items} />
+</Dropdown>

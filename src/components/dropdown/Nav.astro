@@ -1,0 +1,20 @@
+---
+import DropdownContent from "./Content.astro";
+import MenuNav from "../menu/Menu.astro";
+
+interface Props {
+  items: {
+    title: string;
+    href: string;
+    target?: string;
+    scroll?: string;
+  }[];
+  className?: string;
+}
+
+const { items, className } = Astro.props;
+---
+
+<DropdownContent className={className}>
+  <MenuNav items={items} className="dropdown-nav" />
+</DropdownContent>

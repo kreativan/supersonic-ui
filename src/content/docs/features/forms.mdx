@@ -1,0 +1,596 @@
+---
+title: Forms
+description: Complete guide to handling forms with Supersonic - validation, submission, captcha, and response handling
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+Supersonic Forms provides a comprehensive solution for handling form submissions on static websites with built-in validation, AJAX submission, captcha protection, and flexible response handling.
+
+## Quick Start
+
+Here's a most basic contact form example:
+
+```html
+<form id="contact-form">
+  <input type="text" name="name" id="name" required>
+  <input type="email" name="email" id="email" required>
+  <textarea name="message" id="message" required></textarea>
+  <input type="text" name="numb_captcha" id="captcha" required>
+  <button type="submit" id="submit-btn">Send Message</button>
+</form>
+
+<script>
+  const form = new supersonic.newForm({
+    formId: 'contact-form',
+    submitButton: '#submit-btn',
+    ajaxUrl: '/api/contact',
+    method: 'POST'
+  });
+</script>
+```
+
+## Configuration Options
+
+### Basic Options
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `formId` | string | Yes | The ID of the form element (without `#`) |
+| `submitButton` | string | Yes | CSS selector for the submit button |
+| `ajaxUrl` | string | Yes | URL endpoint to send form data to |
+| `method` | string | No | HTTP method: `'POST'` or `'GET'` (default: `'POST'`) |
+
+### Advanced Options
+
+| Option | Type | Required | Description |
+|--------|------|----------|-------------|
+| `data` | object | No | Additional data to include with form submission |
+| `indicator` | string | No | CSS selector for loading indicator element |
+| `responseType` | string | No | Response handler type: `'default'` or `'swal'` (default: `'default'`) |
+| `callback` | function | No | Custom callback function to handle response |
+| `recaptcha` | boolean/string | No | Enable Google reCAPTCHA v3 |
+| `recaptcha_site_key` | string | No | Your Google reCAPTCHA v3 site key |
+
+### Complete Example with All Options
+
+```javascript
+const form = new supersonic.newForm({
+  formId: 'contact-form',
+  submitButton: '#submit-btn',
+  ajaxUrl: '/api/contact',
+  method: 'POST',
+  data: {
+    source: 'website',
+    page: 'contact-us'
+  },
+  indicator: '#loading-spinner',
+  responseType: 'swal',
+  callback: (response) => {
+    if (response.success) {
+      console.log('Form submitted successfully!');
+    }
+  }
+});
+```
+
+## Form Validation
+
+Supersonic includes built-in client-side validation that runs automatically before form submission.
+
+#### Required Fields
+
+Add the `required` attribute to any input to make it mandatory:
+
+```html
+<input type="text" name="name" required>
+```
+#### Real-time Validation
+
+Forms automatically watch for field changes and display errors in real-time. Validation triggers on:
+- `keyup` - As the user types
+- `change` - When field value changes
+- `blur` - When field loses focus
+
+#### Error Display
+
+Validation errors are displayed automatically below each field:
+
+```html
+<div>
+  <input type="email" name="email" required>
+  <!-- Error message appears here -->
+  <span class="error-message">Invalid email address</span>
+</div>
+```
+
+The parent `<div>` receives an `.error` class when validation fails, allowing you to style error states:
+
+```css
+.error input {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+}
+```
+
+## Number Captcha (Anti-Spam)
+
+Supersonic includes a simple math-based captcha to prevent spam submissions without requiring external services.
+
+### Setup
+
+Add an input field with the name `numb_captcha`:
+
+```html
+<div>
+  <label for="captcha">What is the sum?</label>
+  <input type="text" name="numb_captcha" id="captcha" required>
+</div>
+```
+
+The library automatically:
+1. Generates two random numbers
+2. Sets the input placeholder to show the equation (e.g., "7 + 3 = ?")
+3. Adds hidden fields with the numbers for server-side verification
+4. Validates the answer before submission
+
+### How It Works
+
+When you initialize the form, the captcha is automatically generated:
+
+```javascript
+// Captcha is set up automatically
+const form = new supersonic.newForm({
+  formId: 'contact-form',
+  submitButton: '#submit-btn',
+  ajaxUrl: '/api/contact'
+});
+```
+
+The user sees a placeholder like "**7 + 3 = ?**" and must enter "**10**" to pass validation.
+
+## Form Submission
+
+### Basic AJAX Submission
+
+Forms are submitted via the Fetch API without page reload:
+
+```javascript
+const form = new supersonic.newForm({
+  formId: 'contact-form',
+  submitButton: '#submit-btn',
+  ajaxUrl: '/api/contact',
+  method: 'POST'
+});
+```
+
+### Loading Indicator
+
+Show a loading spinner during submission:
+
+```html
+<div id="loading" class="hidden">
+  <span>Sending...</span>
+</div>
+
+<script>
+  const form = new supersonic.newForm({
+    formId: 'contact-form',
+    submitButton: '#submit-btn',
+    ajaxUrl: '/api/contact',
+    indicator: '#loading'
+  });
+</script>
+```
+
+The indicator automatically:
+- Removes the `hidden` class when submitting
+- Adds it back after receiving response
+
+### Additional Data
+
+Include extra data with every submission:
+
+```javascript
+const form = new supersonic.newForm({
+  formId: 'contact-form',
+  submitButton: '#submit-btn',
+  ajaxUrl: '/api/contact',
+  data: {
+    utm_source: 'google',
+    utm_campaign: 'summer-sale',
+    page_url: window.location.href,
+    timestamp: new Date().toISOString()
+  }
+});
+```
+
+### File Uploads
+
+File inputs are automatically handled:
+
+```html
+<form id="upload-form">
+  <input type="file" name="attachment" accept=".pdf,.doc,.docx">
+  <button type="submit" id="upload-btn">Upload</button>
+</form>
+
+<script>
+  const form = new supersonic.newForm({
+    formId: 'upload-form',
+    submitButton: '#upload-btn',
+    ajaxUrl: '/api/upload',
+    method: 'POST'
+  });
+</script>
+```
+
+## Google reCAPTCHA v3
+
+Protect your forms with Google reCAPTCHA v3 (invisible captcha).
+
+### Setup
+
+1. Get your reCAPTCHA v3 keys from [Google reCAPTCHA Admin](https://www.google.com/recaptcha/admin)
+2. Add the reCAPTCHA script to your page:
+
+```html
+<script src="https://www.google.com/recaptcha/api.js?render=YOUR_SITE_KEY"></script>
+```
+
+3. Configure the form:
+
+```javascript
+const form = new supersonic.newForm({
+  formId: 'contact-form',
+  submitButton: '#submit-btn',
+  ajaxUrl: '/api/contact',
+  recaptcha: true,
+  recaptcha_site_key: 'YOUR_SITE_KEY'
+});
+```
+
+The reCAPTCHA token is automatically included in the form data as `recaptcha_response`.
+
+### Server-Side Verification
+
+Your backend must verify the token:
+
+<Tabs>
+  <TabItem label="Node.js">
+    ```javascript
+    // Example Node.js/Express
+    const verifyUrl = 'https://www.google.com/recaptcha/api/siteverify';
+    const response = await fetch(verifyUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=YOUR_SECRET_KEY&response=${recaptchaToken}`
+    });
+
+    const data = await response.json();
+    if (data.success && data.score > 0.5) {
+      // Valid submission
+    }
+    ```  
+  </TabItem>
+  <TabItem label="PHP">
+    ```php
+    <?php
+    // Example PHP
+    $recaptcha_url = 'https://www.google.com/recaptcha/api/siteverify';
+    $recaptcha_secret = 'YOUR_SECRET_KEY';
+    $recaptcha_response = $_POST['recaptcha_response']; 
+    $response = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+    $data = json_decode($response);
+    if ($data->success && $data->score > 0.5) {
+      // Valid submission
+    }
+    ```  
+  </TabItem>
+</Tabs>
+
+## Response Handling
+
+### Server Response Format
+
+Your server should return JSON responses in this format:
+
+```json
+{
+  "success": true,
+  "message": "Thank you! Your message has been sent.",
+  "body": "<p>We'll get back to you within 24 hours.</p>",
+  "errors": []
+}
+```
+
+Or for errors:
+
+```json
+{
+  "success": false,
+  "message": "Submission failed",
+  "errors": [
+    {
+      "name": "email",
+      "error": "Email address is already registered"
+    }
+  ]
+}
+```
+
+### Default Response Handler
+
+By default, successful submissions:
+- Clear the form fields
+- Hide any error messages
+- Trigger custom events
+
+```javascript
+const form = new supersonic.newForm({
+  formId: 'contact-form',
+  submitButton: '#submit-btn',
+  ajaxUrl: '/api/contact',
+  responseType: 'default' // default handler
+});
+```
+
+### SweetAlert2 Response Handler
+
+Use beautiful modal popups for responses (requires [SweetAlert2](https://sweetalert2.github.io/)).
+
+Supersonic comes with SweetAlert2 integration out of the box, just has to be enabled when initializing supersonic instances.
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  const form = new supersonic.newForm({
+    formId: 'contact-form',
+    submitButton: '#submit-btn',
+    ajaxUrl: '/api/contact',
+    responseType: 'swal'
+  });
+</script>
+```
+
+Success responses show a modal with the message or body content. Error responses show an error toast notification.
+
+### Custom Callback
+
+Handle responses with your own logic:
+
+```javascript
+const form = new supersonic.newForm({
+  formId: 'contact-form',
+  submitButton: '#submit-btn',
+  ajaxUrl: '/api/contact',
+  callback: (response) => {
+    if (response.success) {
+      // Redirect to thank you page
+      window.location.href = '/thank-you';
+    } else {
+      // Show custom error message
+      alert(response.message);
+    }
+  }
+});
+```
+
+When using a callback, the default response handler is not executed.
+
+## Custom Events
+
+Supersonic Forms dispatches custom events you can listen to:
+
+### Before Submit
+
+Triggered before the form is submitted. Cancel submission by calling `preventDefault()`:
+
+```javascript
+document.addEventListener('supersonic:FormSubmitBefore', (e) => {
+  const formData = e.detail;
+  console.log('About to submit:', formData);
+  
+  // Cancel submission conditionally
+  if (someCondition) {
+    e.preventDefault();
+  }
+});
+```
+
+### After Submit
+
+Triggered after receiving a response:
+
+```javascript
+document.addEventListener('supersonic:FormSubmitAfter', (e) => {
+  const response = e.detail;
+  console.log('Response received:', response);
+  
+  // Track with analytics
+  if (response.success) {
+    gtag('event', 'form_submission', {
+      form_id: response.form_css_id
+    });
+  }
+});
+```
+
+### Response Success
+
+Triggered only on successful responses:
+
+```javascript
+document.addEventListener('supersonic:AjaxResponseSuccess', (e) => {
+  const response = e.detail;
+  console.log('Success:', response.message);
+});
+```
+
+### Response Error
+
+Triggered only on error responses:
+
+```javascript
+document.addEventListener('supersonic:AjaxResponseError', (e) => {
+  const response = e.detail;
+  console.error('Error:', response.message);
+});
+```
+
+## Complete Contact Form Example
+
+Here's a full, production-ready contact form:
+
+<Tabs>
+  <TabItem label="HTML">
+  ```html
+  <form id="contact-form">
+      <div class="form-group">
+        <label for="name">Full Name *</label>
+        <input type="text" name="name" id="name" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="email">Email Address *</label>
+        <input type="email" name="email" id="email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="message">Message *</label>
+        <textarea name="message" id="message" rows="5" required></textarea>
+      </div>
+      
+      <div class="form-group">
+        <label for="captcha">Math Challenge *</label>
+        <input type="text" name="numb_captcha" id="captcha" required placeholder="Answer will appear here">
+      </div>
+      
+      <div id="loading-indicator" class="hidden">
+        <div class="loading-spinner"></div>
+        Sending your message...
+      </div>
+      
+      <button type="submit" id="submit-btn">Send Message</button>
+    </form>
+  ```
+  </TabItem>
+  <TabItem label="JavaScript">
+  ```javascript
+  // Initialize the form
+    const contactForm = new supersonic.newForm({
+      formId: 'contact-form',
+      submitButton: '#submit-btn',
+      ajaxUrl: '/api/contact',
+      method: 'POST',
+      indicator: '#loading-indicator',
+      responseType: 'swal',
+      data: {
+        page: 'contact',
+        source: 'website',
+        referrer: document.referrer
+      },
+      callback: (response) => {
+        if (response.success) {
+          console.log('Message sent successfully!');
+          
+          // Optional: Track with Google Analytics
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'form_submission', {
+              event_category: 'Contact',
+              event_label: 'Contact Form'
+            });
+          }
+        }
+      }
+    });
+    
+    // Listen to custom events
+    document.addEventListener('supersonic:FormSubmitAfter', (e) => {
+      console.log('Form submission complete:', e.detail);
+    });
+  ```
+  </TabItem>
+</Tabs>
+
+## Helper Functions
+
+Supersonic Forms also provides utility functions for advanced use cases:
+
+### Clear Form
+
+Manually clear all form fields:
+
+```javascript
+// Available on global supersonic object
+supersonic.form.clearForm('contact-form');
+```
+
+### Set Field Values
+
+Programmatically set form field values:
+
+```javascript
+supersonic.form.setFieldValues('contact-form', {
+  name: 'John Doe',
+  email: 'john@example.com',
+  message: 'Hello!'
+});
+```
+
+### Manual Validation
+
+Validate a specific field:
+
+```javascript
+const field = document.querySelector('[name="email"]');
+const error = supersonic.form.validation.validateField(field);
+
+if (error) {
+  console.log(`Error in ${error.name}: ${error.error}`);
+}
+```
+
+### Watch Form
+
+Manually enable real-time validation:
+
+```javascript
+supersonic.form.watch('contact-form');
+```
+
+### Generate Captcha
+
+Manually generate a number captcha:
+
+```javascript
+supersonic.form.numbCaptcha('contact-form');
+```
+
+## Cleanup
+
+If you need to remove event listeners (e.g., in a single-page application):
+
+```javascript
+const form = new supersonic.newForm({...});
+
+// Later, when component unmounts
+form.destroy();
+```
+
+## Internationalization
+
+Customize validation messages for different languages:
+
+```javascript
+// Set custom messages before initializing form
+supersonic.i18n.set('invalid_email', 'Por favor, introduce un email válido');
+supersonic.i18n.set('required_field', 'Este campo es obligatorio');
+
+// Then initialize your form
+const form = new supersonic.newForm({...});
+```

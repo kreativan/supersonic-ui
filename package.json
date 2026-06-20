@@ -1,0 +1,53 @@
+{
+  "name": "supersonic-ui",
+  "type": "module",
+  "version": "0.0.1",
+  "author": "Ivan Milincic",
+  "description": "Lightweight UI library and set of helpers for the web, designed for marketing sites, landing pages, and content-driven experiences.",
+  "license": "MIT",
+
+  "main": "./dist/js/supersonic.umd.js",
+  "module": "./dist/js/supersonic.esm.js",
+  "browser": "./dist/js/supersonic.umd.js",
+  "jsdelivr": "./dist/js/supersonic.umd.js",
+  "unpkg": "./dist/js/supersonic.umd.js",
+  "style": "./dist/css/supersonic.min.css",
+
+  "files": [
+    "dist/js/supersonic.umd.js",
+    "dist/js/supersonic.es.js",
+    "dist/css/supersonic.min.css",
+    "dist/css/supersonic.css",
+    "src/js/",
+    "src/css/",
+    "src/components/"
+  ],
+
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kreativan/supersonic-ui.git"
+  },
+
+  "keywords": [ "supersonic", "library", "astro", "javascript" ],
+
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "supersonic:build": "node build/build-supersonic.js"
+  },
+
+  "dependencies": {
+    "@astrojs/starlight": "^0.40.0",
+    "@tailwindcss/vite": "^4.1.11",
+    "astro": "^6.4.8",
+    "sharp": "^0.34.2",
+    "tailwindcss": "^4.1.11"
+  },
+
+  "overrides": {
+    "vite": "^7.0.0"
+  }
+}

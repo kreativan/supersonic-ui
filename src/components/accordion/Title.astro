@@ -1,0 +1,9 @@
+---
+import Close from "@assets/svg/close.svg";
+const { title } = Astro.props;
+---
+
+<h3 class="accordion-title relative">
+  {Astro.slots.default ? <slot /> : title}
+  <Close />
+</h3>

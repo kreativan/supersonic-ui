@@ -1,0 +1,17 @@
+/* geist.css - Stylesheet for Geist Sans (Variable Font) */
+
+@font-face {
+  font-family: "Geist";
+  src: url("./geist/Geist[wght].woff2") format("woff2-variations");
+  font-weight: 200 900; /* Supports weights from Thin (200) to Black (900) */
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("./geist/GeistMono[wght].woff2") format("woff2-variations");
+  font-weight: 200 900; /* Supports weights from Thin (200) to Black (900) */
+  font-style: normal;
+  font-display: swap;
+}

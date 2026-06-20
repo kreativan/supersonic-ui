@@ -1,0 +1,223 @@
+---
+title: Observer
+description: The Observer component provides a utility function to observe elements using the Intersection Observer API. It automatically adds an `in-view` class to elements when they enter the viewport and can trigger custom callbacks.
+---
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Observer component provides a utility function to observe elements using the Intersection Observer API. It automatically adds an `in-view` class to elements when they enter the viewport and can trigger custom callbacks.
+
+##### Function: `observeElement`
+
+## Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `selector` | string | CSS selector for the elements to observe. |
+| `root` | Element, optional | The element used as the viewport for checking visibility. Defaults to `null` (browser viewport). |
+| `rootMargin` | string, optional | Margin around the root. Defaults to `'0px'`. |
+| `threshold` | number, optional | Percentage of element visibility to trigger the observer. Defaults to `0.2`. |
+| `repeat` | boolean, optional | Whether to repeat the observation after the element has entered. Defaults to `false`. |
+| `onEnter` | function, optional | Callback function called when the element enters the viewport. Receives `(element, entry)` as arguments. |
+
+## Usage
+
+<Tabs>
+  <TabItem label="Vanilla JS">
+    ```js
+    // Assuming supersonic is globally available
+    supersonic.ui.observeElement({
+      selector: '.myElement',
+      root: document.querySelector('#myContainer'), // Optional: Element used as viewport
+      rootMargin: '50px', // Optional: Margin around root
+      threshold: 0.5, // Optional: Percentage of element visibility
+      repeat: true, // Optional: Repeat observation after entering
+      onEnter: (element, entry) => console.log('Element entered:', element)
+    });
+    ```
+  </TabItem>
+  <TabItem label="ESM">
+    ```js
+    import { observeElement } from './observer.js';
+
+    observeElement({
+      selector: '.myElement',
+      root: document.querySelector('#myContainer'), // Optional: Element used as viewport
+      rootMargin: '50px', // Optional: Margin around root
+      threshold: 0.5, // Optional: Percentage of element visibility
+      repeat: true, // Optional: Repeat observation after entering
+      onEnter: (element, entry) => console.log('Element entered:', element)
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+## Example
+Example of observing an element with a custom callback.
+When the element with the ID `my-element` enters the viewport by at least 50%, a SweetAlert2 popup is triggered.
+
+<Tabs>
+  <TabItem label="html">
+  ```astro
+  <script>
+    window.addEventListener("DOMContentLoaded", () => {
+      supersonic.ui.observeElement({
+        selector: "#my-element",
+        threshold: 0.5,
+        repeat: true,
+        onEnter: (element, entry) => {
+          swal.fire({
+            title: "My Element",
+            text: "My element has been entered the viewport!",
+            icon: "info",
+          });
+        },
+      });
+    });
+  </script>
+  ```
+  </TabItem>
+</Tabs>
+
+### Example 2: Observing Multiple Elements
+Observe all elements with the class `.animate-on-scroll` and add a fade-in animation when they enter the viewport.
+
+<Tabs>
+  <TabItem label="Vanilla JS">
+    ```js
+    // Assuming supersonic is globally available
+    supersonic.ui.observeElement({
+      selector: '.animate-on-scroll',
+      threshold: 0.1,
+      onEnter: (element, entry) => {
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+      },
+    });
+    ```
+  </TabItem>
+
+  <TabItem label="ESM">
+    ```js
+    import { observeElement } from './observer.js';
+
+    observeElement({
+      selector: '.animate-on-scroll',
+      threshold: 0.1,
+      onEnter: (element, entry) => {
+        element.style.opacity = '1';
+        element.style.transform = 'translateY(0)';
+      },
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+### Example 3: Using a Custom Root Container
+Observe elements within a specific container instead of the entire viewport.
+
+<Tabs>
+  <TabItem label="Vanilla JS">
+    ```js
+    // Assuming supersonic is globally available
+    supersonic.ui.observeElement({
+      selector: '.scroll-item',
+      root: document.querySelector('#scroll-container'),
+      rootMargin: '20px',
+      threshold: 0.5,
+      onEnter: (element, entry) => {
+        console.log('Element in container:', element.textContent);
+      },
+    });
+    ```
+  </TabItem>
+
+  <TabItem label="ESM">
+    ```js
+    import { observeElement } from './observer.js';
+
+    observeElement({
+      selector: '.scroll-item',
+      root: document.querySelector('#scroll-container'),
+      rootMargin: '20px',
+      threshold: 0.5,
+      onEnter: (element, entry) => {
+        console.log('Element in container:', element.textContent);
+      },
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+### Example 4: One-Time Observation
+Observe elements only once when they first enter the viewport, without repeating.
+
+<Tabs>
+  <TabItem label="Vanilla JS">
+    ```js
+    // Assuming supersonic is globally available
+    supersonic.ui.observeElement({
+      selector: '.load-once',
+      threshold: 0.2,
+      repeat: false, // Only trigger once
+      onEnter: (element, entry) => {
+        // Load content or perform action
+        element.innerHTML = '<p>Content loaded!</p>';
+      },
+    });
+    ```
+  </TabItem>
+
+  <TabItem label="ESM">
+    ```js
+    import { observeElement } from './observer.js';
+
+    observeElement({
+      selector: '.load-once',
+      threshold: 0.2,
+      repeat: false, // Only trigger once
+      onEnter: (element, entry) => {
+        // Load content or perform action
+        element.innerHTML = '<p>Content loaded!</p>';
+      },
+    });
+    ```
+  </TabItem>
+</Tabs>
+
+### Example 5: Repeating Observation
+Observe elements repeatedly each time they enter the viewport, allowing for multiple triggers as the element enters and leaves multiple times.
+
+<Tabs>
+  <TabItem label="Vanilla JS">
+    ```js
+    // Assuming supersonic is globally available
+    supersonic.ui.observeElement({
+      selector: '.repeat-element',
+      threshold: 0.5,
+      repeat: true, // Trigger every time it enters
+      onEnter: (element, entry) => {
+        console.log('Element entered viewport again:', element.id);
+        element.classList.add('highlight');
+        setTimeout(() => element.classList.remove('highlight'), 1000);
+      },
+    });
+    ```
+  </TabItem>
+
+  <TabItem label="ESM">
+    ```js
+    import { observeElement } from './observer.js';
+
+    observeElement({
+      selector: '.repeat-element',
+      threshold: 0.5,
+      repeat: true, // Trigger every time it enters
+      onEnter: (element, entry) => {
+        console.log('Element entered viewport again:', element.id);
+        element.classList.add('highlight');
+        setTimeout(() => element.classList.remove('highlight'), 1000);
+      },
+    });
+    ```
+  </TabItem>
+</Tabs>

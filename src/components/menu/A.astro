@@ -1,0 +1,16 @@
+---
+interface Props {
+  title: string;
+  href: string;
+  target?: string;
+  scroll?: string;
+}
+
+const { title, href, target, scroll } = Astro.props;
+
+let rel = target === "_blank" ? "noopener noreferrer" : undefined;
+---
+
+<a href={href} title={title} target={target} rel={rel} data-scroll={scroll}>
+  {Astro.slots.has("default") ? <slot /> : title}
+</a>

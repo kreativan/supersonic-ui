@@ -1,0 +1,30 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import {
+  Drawer as DrawerComponent,
+  DrawerTrigger,
+  DrawerClose,
+} from "@components/drawer";
+---
+
+<Layout title="Drawer">
+  <DrawerTrigger id="example-drawer" className="btn btn-default">
+    Open Drawer
+  </DrawerTrigger>
+
+  <DrawerComponent id="example-drawer">
+    <div class="drawer-content space-y-5">
+      <h3 class="text-2xl">Drawer Content</h3>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Non impedit
+        vero alias voluptas illo reprehenderit ad. Suscipit optio ab debitis
+        placeat illo iusto sapiente iure ullam nam! Ullam, repellat mollitia!
+      </p>
+      <a href="/playground">Playground</a>
+      <DrawerClose id="example-drawer" className="btn btn-default btn-sm mt-3">
+        Close
+      </DrawerClose>
+    </div>
+  </DrawerComponent>
+</Layout>

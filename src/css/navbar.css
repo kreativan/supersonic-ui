@@ -1,0 +1,41 @@
+:root {
+  --navbar-height: 60px;
+  --navbar-bg: #ffffff;
+  --navbar-logo-width: 25%;
+  --navbar-actions-width: 25%;
+  --navbar-menu-gap: 30px;
+}
+
+.navbar {
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--navbar-bg);
+
+
+  .navbar-logo {
+    width: var(--navbar-logo-width);
+    display: flex;
+    align-items: center;
+  }
+
+  .navbar-menu {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: var(--navbar-menu-gap);
+  }
+
+  .navbar-menu > li > a {
+    line-height: var(--navbar-height);
+  }
+
+  .navbar-actions {
+    width: var(--navbar-actions-width);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+}

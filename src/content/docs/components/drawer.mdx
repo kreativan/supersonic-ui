@@ -1,0 +1,120 @@
+---
+title: Drawer
+description: A drawer component with smooth slide animations. Supports multiple drawers, ESC key to close, body scroll lock, and optional background overlay.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+A drawer component with smooth slide animations. Supports multiple drawers, ESC key to close, body scroll lock, and optional background overlay.
+
+You can preview the Drawer component in action on the <a href="/playground/drawer" target="_blank">Playground</a>.
+
+<Tabs>
+  <TabItem label="Html">
+    ```html
+      <!-- Drawer -->    
+      <div 
+        data-drawer="my-drawer" 
+        data-drawer-overlay="true"
+        class="hidden"
+      >
+        Drawer content
+
+        <!-- Close Button -->
+        <button data-drawer-close="my-drawer">Close</button>
+      </div>
+
+      <!-- Trigger -->
+      <button data-drawer-trigger="my-drawer">Open Drawer</button>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+    ---
+    import {
+      Drawer,
+      DrawerTrigger,
+      DrawerClose,
+    } from "@components/drawer";
+    ---
+    <Drawer id="my-drawer" overlay="true">
+      Drawer content
+    </Drawer>
+
+    <DrawerTrigger id="my-drawer">
+      Open Drawer
+    </DrawerTrigger>
+
+    <DrawerClose id="my-drawer">
+      Close Drawer
+    </DrawerClose>
+    ```
+  </TabItem>
+</Tabs>
+
+## Props
+
+| Prop    | Type    | Default | Description                          |
+| ------- | ------- | ------- | ------------------------------------ |
+| `id`    | string  |         | Unique identifier for the drawer.    |
+| `overlay` | string | true   | Whether to show a background overlay when the drawer is open. |
+| `className` | string  |         | Additional CSS classes for the drawer. |
+
+## Trigger
+Use the `DrawerTrigger` component or the `data-drawer-trigger` attribute on any element to open the drawer.
+
+<Tabs>
+  <TabItem label="Html">
+    ```html
+    <button data-drawer-trigger="my-drawer">Open Drawer</button>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+    <DrawerTrigger id="my-drawer">
+      Open Drawer
+    </DrawerTrigger>
+    ```
+  </TabItem>
+</Tabs>
+
+|Prop | Type   | Description                     |
+|-----|--------|---------------------------------|
+|`id` | string | The unique identifier of the drawer to open. |
+| `className` | string | Additional CSS classes for the trigger element. |
+
+## Close
+Use the `DrawerClose` component or the `data-drawer-close` attribute on any element to close the drawer.
+
+<Tabs>
+  <TabItem label="Html">
+    ```html
+    <button data-drawer-close="my-drawer">Close Drawer</button>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+    <DrawerClose id="my-drawer">
+      Close Drawer
+    </DrawerClose>
+    ```
+  </TabItem>
+</Tabs>
+
+|Prop | Type   | Description                     |
+|-----|--------|---------------------------------|
+|`id` | string | The unique identifier of the drawer to close. |
+| `className` | string | Additional CSS classes for the close element. |
+
+
+## CSS Variables
+
+The Drawer component supports the following CSS variables for customization:
+
+```css
+--drawer-bg: #ffffff;
+--drawer-border: rgba(0, 0, 0, 0.1);
+--drawer-width: 400px;
+--drawer-padding: 20px;
+--drawer-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+```

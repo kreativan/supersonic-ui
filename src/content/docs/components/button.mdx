@@ -1,0 +1,154 @@
+---
+title: Button
+description: Simple button component with variants, sizes, and CSS variables.
+---
+
+import { Code } from '@astrojs/starlight/components';
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+import Button from '@components/button/Button.astro';
+
+The Button component is a flexible UI element for creating styled buttons or links, supporting various variants and sizes for consistent design.
+
+## Styles
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="space-x-5!">
+      <Button style="default" size="md" title="Default Button">
+        Default
+      </Button>
+      <Button style="primary" size="md" title="Primary Button">
+        Primary
+      </Button>
+      <Button style="secondary" size="md" title="Secondary Button">
+        Secondary
+      </Button>
+      <Button style="outline" size="md" title="Outline Button">
+        Outline
+      </Button>
+      <Button style="danger" size="md" title="Danger Button">
+        Danger
+      </Button>
+      <Button style="primary" size="md" title="Rounded Button" className="btn-rounded">
+        Rounded
+      </Button> 
+    </div>
+  </TabItem>
+  <TabItem label="Html">
+    ```html
+    <a href="#" class="btn btn-primary">Primary Button</a>
+    <a href="#" class="btn btn-secondary">Secondary Button</a>
+    <a href="#" class="btn btn-outline">Outline Button</a>
+    <a href="#" class="btn btn-danger">Danger Button</a>
+    <a href="#" class="btn btn-primary btn-rounded">Rounded Button</a>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+    <Button 
+      href="#"
+      target="_blank"
+      size="md"
+      style="default" 
+      title="Default Button"
+      rounded={true}
+      className="my-custom-class"
+    >
+      Button
+    </Button>
+    ```
+  </TabItem>
+</Tabs>
+
+## Sizes
+
+<Tabs>
+  <TabItem label="Preview">
+    <div class="space-x-5!">
+      <Button style="primary" size="sm" title="Small" />
+      <Button style="primary" size="md" title="Medium" />
+      <Button style="primary" size="lg" title="Large" />
+    </div>
+  </TabItem>
+  <TabItem label="Html">
+    ```html
+    <a href="#" class="btn btn-primary btn-sm">Small Button</a>
+    <a href="#" class="btn btn-primary btn-md">Medium Button</a>
+    <a href="#" class="btn btn-primary btn-lg">Large Button</a>
+    ```
+  </TabItem>
+  <TabItem label="Astro">
+    ```astro
+      <Button style="primary" size="sm" title="Small" />
+      <Button style="primary" size="md" title="Medium" />
+      <Button style="primary" size="lg" title="Large" />
+    ```
+    </TabItem>
+</Tabs>
+
+## Astro Component
+The button component can be used with or without a slot for content eg:
+```astro
+<Button title='Click Me' />
+
+<Button>Click me</Button>
+```
+
+
+### Props
+
+| Prop      | Type    | Description                                                                 |
+|-----------|---------|-----------------------------------------------------------------------------|
+| `style`   | string  | Defines the button style (e.g., "default", "primary", "secondary", "outline", "danger"). |
+| `size`    | string  | Sets the button size (e.g., "sm", "md", "lg").                              |
+| `title`   | string  | Provides a title attribute for accessibility.                               |
+| `href`    | string  | Makes the button a link; if omitted, it renders as a `<button>` element.    |
+| `target`  | string  | Specifies the link target (e.g., "_blank"); if "_blank", adds rel="noopener noreferrer". |
+| `rounded` | boolean | Enables rounded corners when true.                                          |
+| `className` | string | Adds custom CSS classes.                                                   |
+
+If the button does not have an `href` prop, it renders as a `<button>` element; otherwise, it renders as an `<a>` element.
+
+## CSS Variables
+
+The Button component utilizes the following CSS variables for customization:
+
+```css
+/* General variables */
+--btn-height: 40px; /* Height of the button. */
+--btn-font-size: 16px; /* Font size of the button text. */
+--btn-padding-x: 20px; /* Horizontal padding inside the button. */
+--btn-radius: 5px; /* Border radius of the button. */
+
+/* Size-specific variables */
+--btn-sm-height: 32px; /* Height for small buttons. */
+--btn-sm-font-size: 14px; /* Font size for small buttons. */
+--btn-sm-padding-x: 16px; /* Horizontal padding for small buttons. */
+--btn-lg-height: 48px; /* Height for large buttons. */
+--btn-lg-font-size: 18px; /* Font size for large buttons. */
+--btn-lg-padding-x: 24px; /* Horizontal padding for large buttons. */
+
+/* Style-specific variables */
+--btn-default-bg: #e2e8f0; /* Background color for default style. */
+--btn-default-color: #0f172a; /* Text color for default style. */
+--btn-default-hover-bg: #cbd5e1; /* Hover background for default style. */
+
+--btn-primary-bg: #0f172a; /* Background color for primary style. */
+--btn-primary-color: #f8fafc; /* Text color for primary style. */
+--btn-primary-hover: #1e293b; /* Hover background for primary style. */
+
+--btn-secondary-bg: #f1f5f9; /* Background color for secondary style. */
+--btn-secondary-color: #0f172a; /* Text color for secondary style. */
+--btn-secondary-hover: #e2e8f0; /* Hover background for secondary style. */
+
+--btn-danger-bg: #ef4444; /* Background color for danger style. */
+--btn-danger-color: #ffffff; /* Text color for danger style. */
+--btn-danger-hover: #dc2626; /* Hover background for danger style. */
+
+--btn-outline-border: #e2e8f0; /* Border color for outline style. */
+--btn-outline-bg: #ffffff; /* Background color for outline style. */
+--btn-outline-color: #0f172a; /* Text color for outline style. */
+--btn-outline-hover-bg: #f1f5f9; /* Hover background for outline style. */
+```
+
+Note: Dark mode overrides some variables when `[data-theme='dark']` is applied.

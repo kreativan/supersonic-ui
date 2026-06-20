@@ -1,0 +1,28 @@
+---
+interface Props {
+  className?: string;
+  sticky?: {
+    threshold?: number;
+    offset?: number;
+    stickyOnTop?: boolean;
+  } | null;
+}
+
+const { className, sticky = null } = Astro.props;
+
+let cls = "navbar";
+if (className) cls += ` ${className}`;
+
+let stickyOptions = null;
+
+if (sticky) {
+  stickyOptions = "";
+  if (sticky.threshold) stickyOptions += `threshold:${sticky.threshold};`;
+  if (sticky.offset) stickyOptions += `offset:${sticky.offset};`;
+  if (sticky.stickyOnTop) stickyOptions += `stickyOnTop:${sticky.stickyOnTop}`;
+}
+---
+
+<div class={cls} data-navbar-sticky={stickyOptions}>
+  <slot />
+</div>

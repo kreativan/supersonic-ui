@@ -1,0 +1,42 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTitle,
+  AccordionContent,
+  AccordionClose,
+} from "@components/accordion";
+---
+
+<Layout title="Accordion">
+  <Accordion>
+    <AccordionItem>
+      <AccordionTitle>Accordion Item 1</AccordionTitle>
+      <AccordionContent>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus sequi
+          hic iste eveniet provident. At commodi, id veritatis aut aperiam
+          eaque, consequatur architecto odit voluptas doloremque excepturi animi
+          magnam quae?
+        </p>
+        <AccordionClose className="btn btn-default btn-sm mt-2">
+          Close
+        </AccordionClose>
+      </AccordionContent>
+    </AccordionItem>
+
+    <AccordionItem>
+      <AccordionTitle>Accordion Item 2</AccordionTitle>
+      <AccordionContent>
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus
+          corrupti necessitatibus id dignissimos. Odio officiis tempora nulla
+          distinctio assumenda, quasi officia repellat voluptatem consectetur
+          itaque consequatur est, asperiores rerum. Tempore!.
+        </p>
+      </AccordionContent>
+    </AccordionItem>
+  </Accordion>
+</Layout>
