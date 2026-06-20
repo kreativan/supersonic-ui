@@ -1,49 +1,68 @@
-# Starlight Starter Kit: Basics
+# Supersonic UI
 
-[![Built with Starlight](https://astro.badg.es/v2/built-with-starlight/tiny.svg)](https://starlight.astro.build)
+Supersonic UI is a lightweight UI library and helper toolkit for the web. It is designed for marketing sites, landing pages, and content-driven websites that need polished interactions without a heavy frontend setup. The JavaScript components are activated with data-* attributes, the package includes form handling and validation helpers, and the styling is intentionally minimal while working well with Tailwind CSS.
 
-```
-npm create astro@latest -- --template starlight
-```
+## What it is
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- No build step required for the browser version
+- Works by including a script and stylesheet on the page
+- Data-attribute driven UI components such as accordions, dropdowns, drawers, scroll behavior, and more
+- Includes form helpers for validation, submission, and AJAX response handling
+- Great fit for Astro projects, static websites, and landing pages
 
-## 🚀 Project Structure
+## Build locally
 
-Inside of your Astro + Starlight project, you'll see the following folders and files:
+Install dependencies:
 
-```
-.
-├── public/
-├── src/
-│   ├── assets/
-│   ├── content/
-│   │   └── docs/
-│   └── content.config.ts
-├── astro.config.mjs
-├── package.json
-└── tsconfig.json
+```bash
+npm install
 ```
 
-Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
+Build the library bundles:
 
-Images can be added to `src/assets/` and embedded in Markdown with a relative link.
+```bash
+npm run supersonic:build
+```
 
-Static assets, like favicons, can be placed in the `public/` directory.
+This will generate:
 
-## 🧞 Commands
+- dist/js/supersonic.es.js
+- dist/js/supersonic.umd.js
+- dist/css/supersonic.css
+- dist/css/supersonic.min.css
 
-All commands are run from the root of the project, from a terminal:
+## Include from a CDN
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+### CSS
 
-## 👀 Want to learn more?
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@kreativan/supersonic-ui@0.0.1/dist/css/supersonic.min.css">
+```
 
-Check out [Starlight’s docs](https://starlight.astro.build/), read [the Astro documentation](https://docs.astro.build), or jump into the [Astro Discord server](https://astro.build/chat).
+### JavaScript
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@kreativan/supersonic-ui@0.0.1/dist/js/supersonic.umd.js"></script>
+<script>
+  window.supersonic?.init?.();
+</script>
+```
+
+## Install from npm
+
+```bash
+npm install @kreativan/supersonic-ui
+```
+
+## Usage
+
+Once included, you can use the data-attribute based components directly in your markup. For example:
+
+```html
+<button data-dropdown-trigger>Open menu</button>
+<div data-dropdown>
+  <div data-dropdown-content>Content</div>
+</div>
+```
+
+For forms, initialize the library once and use the built-in helpers as needed.
