@@ -34,19 +34,30 @@ export default defineConfig({
 		starlight({
 			title: 'Supersonic UI',
 			favicon: '/favicon.png',
+
 			logo: {
 				light: './src/assets/supersonic-logo-color.png',
 				dark: './src/assets/supersonic-logo-color-light.png',
 				replacesTitle: true,
 			},
+
 			customCss: [
 				'./src/css/_main.css',
 				'./src/css/_starlight.css',
 				"./src/assets/fonts/inter.css",
 				"./src/assets/fonts/bricolage-grotesque.css"
 			],
+
 			head: headScripts,
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/kreativan/supersonic-ui' }],
+
+			social: [
+				{
+					icon: 'github',
+					label: 'GitHub',
+					href: 'https://github.com/kreativan/supersonic-ui'
+				}
+			],
+
 			sidebar: [
 				{
 					label: 'Introduction',
