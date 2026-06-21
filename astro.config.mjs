@@ -4,6 +4,30 @@ import starlight from '@astrojs/starlight';
 
 import tailwindcss from '@tailwindcss/vite';
 
+const isDev = process.env.NODE_ENV !== 'production';
+
+const headScripts = [
+	{
+		tag: 'script',
+		attrs: {
+			src: isDev ? '/src/js/init.js' : '/js/supersonic.umd.js',
+			type: 'module',
+			defer: false,
+		},
+	}
+];
+
+if (!isDev) {
+	headScripts.push({
+		tag: 'script',
+		attrs: {
+			src: '/init.js',
+			type: 'module',
+			defer: false,
+		},
+	});
+}
+
 // https://astro.build/config
 export default defineConfig({
 	integrations: [
@@ -21,17 +45,7 @@ export default defineConfig({
 				"./src/assets/fonts/inter.css",
 				"./src/assets/fonts/bricolage-grotesque.css"
 			],
-			head: [
-				{
-					tag: 'script',
-					attrs: {
-
-						src: '/src/js/init.js',
-						type: 'module',
-						defer: false,
-					},
-				},
-			],
+			head: headScripts,
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/kreativan/supersonic-ui' }],
 			sidebar: [
 				{
