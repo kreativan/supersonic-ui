@@ -25,6 +25,7 @@ export default defineConfig({
 				{
 					tag: 'script',
 					attrs: {
+
 						src: '/src/js/init.js',
 						type: 'module',
 						defer: false,
