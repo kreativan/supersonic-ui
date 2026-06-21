@@ -1,5 +1,6 @@
 *
-!dist/
+!public/js/
+!public/css/
 !src/js/
 !src/css/
 !src/components/

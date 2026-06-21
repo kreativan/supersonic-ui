@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   publicDir: false,
   build: {
-    outDir: './dist/js/',
+    outDir: './public/js/',
     target: 'es2015',  // Target ES2015 (ES6) for compatibility
     lib: {
       entry: './src/js/index.js',
