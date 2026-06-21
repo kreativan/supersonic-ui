@@ -67,6 +67,15 @@ import Logo from "../assets/supersonic-logo-color.png";
 </StarlightPage>
 
 <style is:global>
+  .header {
+    /* glass effect */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: none;
+    &.header {
+      background: none;
+    }
+  }
   .main-gradient {
     position: absolute;
     inset: 0;

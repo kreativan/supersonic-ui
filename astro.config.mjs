@@ -50,6 +50,10 @@ export default defineConfig({
 
 			head: headScripts,
 
+			components: {
+				SocialIcons: './src/components/SocialIcons.astro',
+			},
+
 			social: [
 				{
 					icon: 'github',
@@ -64,7 +68,6 @@ export default defineConfig({
 					items: [
 						{ label: 'About', link: '/intro/about/' },
 						{ label: 'How To Use', link: '/intro/how-to/' },
-						{ label: 'Playground', link: '/playground/', attrs: { target: '_blank' } },
 					]
 				},
 				{
