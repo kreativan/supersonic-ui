@@ -1,7 +1,7 @@
 {
   "name": "@kreativan/supersonic-ui",
   "type": "module",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "author": "Ivan Milincic",
   "description": "Lightweight UI library and set of helpers for the web, designed for marketing sites, landing pages, and content-driven experiences.",
   "license": "MIT",
