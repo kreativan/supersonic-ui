@@ -26,23 +26,23 @@ npm run supersonic:build
 
 This will generate:
 
-- dist/js/supersonic.es.js
-- dist/js/supersonic.umd.js
-- dist/css/supersonic.css
-- dist/css/supersonic.min.css
+- public/js/supersonic.es.js
+- public/js/supersonic.umd.js
+- public/css/supersonic.css
+- public/css/supersonic.min.css
 
 ## Include from a CDN
 
 ### CSS
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@kreativan/supersonic-ui@0.0.1/dist/css/supersonic.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@kreativan/supersonic-ui@0.0.1/public/css/supersonic.min.css">
 ```
 
 ### JavaScript
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@kreativan/supersonic-ui@0.0.1/dist/js/supersonic.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@kreativan/supersonic-ui@0.0.1/public/js/supersonic.umd.js"></script>
 <script>
   window.supersonic?.init?.();
 </script>

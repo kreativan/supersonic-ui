@@ -6,6 +6,9 @@ import "../css/_main.css";
 import Sidebar from "./_Sidebar.astro";
 
 const { title } = Astro.props;
+
+const isDev = process.env.NODE_ENV !== "production";
+const scriptSrc = !isDev ? "/js/supersonic.umd.js" : "/src/js/init.js";
 ---
 
 <html lang="en" class="overflow-x-hidden">
@@ -14,7 +17,8 @@ const { title } = Astro.props;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <title>{title}</title>
-    <script type="module" src="/src/js/init.js"></script>
+    <script type="module" src={scriptSrc}></script>
+    {!isDev && <script type="module" src="/init.js" />}
   </head>
   <body class="overflow-x-hidden min-h-screen">
     <div class="flex min-h-screen">
