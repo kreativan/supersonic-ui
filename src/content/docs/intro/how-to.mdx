@@ -1,0 +1,100 @@
+---
+title: How To Use
+description: Learn how to install Supersonic UI, include it from jsDelivr, initialize it on your page, and build it locally from source.
+---
+
+Supersonic UI can be used in a few different ways depending on your setup. The simplest approach is to include the bundled CSS and JavaScript files, then call the initialization helper once on the page.
+
+## Install with npm
+
+If you are working in a project already, install the package from npm:
+
+```bash
+npm install @kreativan/supersonic-ui
+```
+
+Then include the built assets from your project:
+
+```html
+<link rel="stylesheet" href="/node_modules/@kreativan/supersonic-ui/dist/css/supersonic.min.css">
+<script src="/node_modules/@kreativan/supersonic-ui/dist/js/supersonic.umd.js"></script>
+<script>
+  window.supersonic.init();
+</script>
+```
+
+If you are using a module bundler, you can also import the initializer directly:
+
+```js
+import { init } from '@kreativan/supersonic-ui';
+
+init();
+```
+
+## Include it from jsDelivr
+
+You can also load Supersonic UI directly from the jsDelivr CDN without installing anything locally:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@kreativan/supersonic-ui@latest/dist/css/supersonic.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@kreativan/supersonic-ui@latest/dist/js/supersonic.umd.js"></script>
+<script>
+  window.supersonic.init({
+    lang: 'en'
+  });
+</script>
+```
+
+This is useful for quick prototypes, demos, or static sites.
+
+## Initialize the library
+
+Call `supersonic.init()` once after the page is ready. This initializes the built-in UI components and helpers.
+
+```html
+<script>
+  window.supersonic.init({
+    lang: 'en',
+    i18n: {
+      close: 'Close',
+      submit: 'Send'
+    }
+  });
+</script>
+```
+
+If you do not need custom options, the default call is enough:
+
+```html
+<script>
+  window.supersonic.init();
+</script>
+```
+
+## Build from source
+
+If you want to work from the repository directly, clone it, install dependencies, and build the library:
+
+```bash
+git clone https://github.com/kreativan/supersonic-ui.git
+cd supersonic-ui
+npm install
+npm run supersonic:build
+```
+
+The build will generate the bundled files in the `dist/js/` and `dist/css/` folders. You can then copy those files into your own project and include them like this:
+
+```html
+<link rel="stylesheet" href="/dist/css/supersonic.min.css">
+<script src="/dist/js/supersonic.umd.js"></script>
+<script>
+  window.supersonic.init();
+</script>
+```
+
+## Notes
+
+- Use the minified CSS file for production when you want a smaller payload.
+- The library is initialized through `window.supersonic.init()` when you use the UMD build.
+- If you need extra integrations such as Google Tag Manager or SweetAlert, initialize them through the same options object.
+

@@ -120,7 +120,7 @@ export function openDrawer(drawerId) {
     document.body.style.overflowY = 'hidden';
 
     // Animate in
-    animateDrawer(drawer, -100, 0, 300, () => { });
+    animateDrawer(drawer, -100, 0, 200, () => { });
 
     // Overlay logic
     if (drawer.getAttribute('data-drawer-overlay') === 'true') {

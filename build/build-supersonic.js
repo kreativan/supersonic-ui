@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 const projectRoot = path.resolve(__dirname, '..');
 const srcCssDir = path.join(projectRoot, 'src', 'css');
 const distCssDir = path.join(projectRoot, 'dist', 'css');
-const bundleEntry = path.join(srcCssDir, '_bundles.css');
+const bundleEntry = path.join(srcCssDir, '_bundle.css');
 
 function resolveCssImports(filePath, seen = new Set()) {
   const absolutePath = path.resolve(filePath);

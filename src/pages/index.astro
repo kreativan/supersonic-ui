@@ -1,0 +1,88 @@
+---
+import StarlightPage from "@astrojs/starlight/components/StarlightPage.astro";
+import { Card, CardGrid } from "@astrojs/starlight/components";
+import { Image } from "astro:assets";
+import Logo from "../assets/supersonic-logo-color.png";
+---
+
+<div class="main-gradient"></div>
+
+<StarlightPage
+  frontmatter={{
+    title: "Supersonic UI",
+    template: "splash",
+    description:
+      "Lightweight UI library designed for the web, especially marketing sites, landing pages, and content-driven experiences where polished interactions matter more than framework overhead",
+    hero: {
+      tagline:
+        "Lightweight UI library designed for the web, especially marketing sites, landing pages, and content-driven experiences where polished interactions matter more than framework overhead",
+      actions: [
+        {
+          text: "Get started",
+          link: "/intro/about/",
+          icon: "right-arrow",
+          variant: "primary",
+        },
+      ],
+    },
+  }}
+>
+  <CardGrid stagger>
+    <Card title="For Websites" icon="window">
+      Optimized for content-driven websites, especially marketing sites and
+      landing pages.
+    </Card>
+    <Card title="No Build" icon="forward-slash">
+      Supersonic UI is designed to work without a build step. Just include the
+      script and styles, then call the initializer.
+    </Card>
+    <Card title="UI Components" icon="puzzle">
+      Growing set of JavaScript components for common UI patterns optimized for
+      marketing websites.
+    </Card>
+    <Card title="Forms" icon="seti:odata">
+      A complete form layer with validation, submission handling, AJAX
+      responses, and feedback patterns.
+    </Card>
+    <Card title="Utilities & Integrations" icon="setting">
+      A collection of utilities and integrations for things injecting GTM,
+      cookies, Observers, and more.
+    </Card>
+    <Card title="TailwindCSS" icon="open-book">
+      Pairs perfect with Tailwind CSS, with minimal default styles and a natural
+      fit for utility-first design.
+    </Card>
+  </CardGrid>
+
+  <footer class="text-center mt-20">
+    <h2 class="inline-flex gap-2 items-center" style="letter-spacing: -1.5px;">
+      <Image src={Logo} alt="Supersonic UI Logo" height={30} />
+      Supersonic UI
+    </h2>
+    <p style="margin-top:5px;">
+      Developed by
+      <a href="https://kreativan.dev" target="_blank"> kreativan.dev </a>
+    </p>
+  </footer>
+</StarlightPage>
+
+<style is:global>
+  .main-gradient {
+    position: absolute;
+    inset: 0;
+    height: 1000px;
+    background: linear-gradient(to bottom, #ff6e0026, transparent 90%);
+  }
+  .stagger .card {
+    transform: translateY(0) !important;
+    border-color: rgba(255, 110, 0, 0.3);
+    border-radius: 8px;
+  }
+
+  /* dark mode */
+  @media (prefers-color-scheme: dark) {
+    .main-gradient {
+      background: linear-gradient(to bottom, #ff6f0018 10%, transparent 90%);
+    }
+  }
+</style>

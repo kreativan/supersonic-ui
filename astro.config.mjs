@@ -9,6 +9,12 @@ export default defineConfig({
 	integrations: [
 		starlight({
 			title: 'Supersonic UI',
+			favicon: '/favicon.png',
+			logo: {
+				light: './src/assets/supersonic-logo-color.png',
+				dark: './src/assets/supersonic-logo-color-light.png',
+				replacesTitle: true,
+			},
 			customCss: [
 				'./src/css/_main.css',
 				'./src/css/_starlight.css',
@@ -25,12 +31,13 @@ export default defineConfig({
 					},
 				},
 			],
-			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/withastro/starlight' }],
+			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/kreativan/supersonic-ui' }],
 			sidebar: [
 				{
 					label: 'Introduction',
 					items: [
 						{ label: 'About', link: '/intro/about/' },
+						{ label: 'How To Use', link: '/intro/how-to/' },
 						{ label: 'Playground', link: '/playground/', attrs: { target: '_blank' } },
 					]
 				},

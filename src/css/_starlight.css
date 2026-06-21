@@ -2,8 +2,8 @@
 :root {
   --sl-font: 'Bricolage Grotesque', serif;
   --sl-color-accent-low: #072d00;
-  --sl-color-accent: #aad7a0;
-  --sl-color-accent-high: #aad7a0;
+  --sl-color-accent: #ff9d52;
+  --sl-color-accent-high: #ff9d52;
   --sl-color-white: #ffffff;
   --sl-color-text-invert: #111;
   /*
@@ -78,4 +78,10 @@ ol {
 
 .sl-markdown-content a:not(:where(.not-content *)) {
   color: var(--starlight-link-color, var(--sl-color-accent));
+}
+
+.header .site-title span {
+  font-family: var(--sl-font);
+  font-weight: 900 !important;
+  letter-spacing: -1.2px;
 }
