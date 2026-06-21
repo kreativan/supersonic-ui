@@ -11,7 +11,7 @@ Call `supersonic.init()` once on your page:
 
 ```html
 <script>
-  window.supersonic.init();
+  window.supersonic.init({ swal: true });
 </script>
 ```
 
@@ -20,7 +20,7 @@ If you are using the module entry point, the same pattern applies:
 ```js
 import { init } from '/src/js/index.js';
 
-init();
+init({ swal: true });
 ```
 
 ## What happens when you initialize it
@@ -38,7 +38,7 @@ After initialization, you can use SweetAlert2 normally:
 
 ```html
 <script>
-  window.supersonic.init();
+  window.supersonic.init({ swal: true });
 
   window.addEventListener('DOMContentLoaded', () => {
     window.Swal.fire({
