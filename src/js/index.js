@@ -11,6 +11,7 @@ import * as Animations from './ui/animations.js';
 import { observeElement } from './ui/observer.js';
 import { viewportAnimations } from './ui/viewport-animations.js';
 import { initStickyNavbar } from './ui/sticky-navbar.js';
+import { initSticky } from './ui/sticky.js';
 import { initDropdowns } from './ui/dropdown.js';
 import { initDrawers } from './ui/drawer.js';
 import { initSubmenus } from './ui/submenu.js';
@@ -73,12 +74,14 @@ export function init(options = {}) {
     { name: 'gtm', function: () => loadGTM(globalScope.supersonic.gtm) }, // Google Tag Manager
     { name: 'swal', function: () => loadSweetAlert() }, // Load SweetAlert library
     { name: 'stickyNavbar', function: () => initStickyNavbar() }, // Sticky navbar
+    { name: 'sticky', function: () => initSticky() }, // Generic sticky elements
     { name: 'viewportAnimations', function: () => viewportAnimations() }, // Viewport animations
     { name: 'dropdowns', function: () => initDropdowns() }, // Dropdowns
     { name: 'drawers', function: () => initDrawers() }, // Drawers
     { name: 'submenus', function: () => initSubmenus() }, // Submenus
     { name: 'scroll', function: () => initScroll() }, // Smooth scroll
     { name: 'accordions', function: () => initAccordions() }, // Accordions
+    { ane: 'sticky', function: () => initSticky() }, // Sticky elements
   ];
 
   /**

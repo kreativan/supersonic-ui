@@ -23,6 +23,7 @@
 
 const ANIMATION_DURATION = 300;
 const SCROLL_DEBOUNCE = 50;
+const STICKY_CLASS_NAME = 'is-sticky';
 
 export function makeStickyNavbar(element, options = {}) {
   const {
@@ -56,6 +57,7 @@ export function makeStickyNavbar(element, options = {}) {
     }
 
     isSticky = true;
+    element.classList.add(STICKY_CLASS_NAME);
 
     // Batch style updates
     element.style.cssText += `position:fixed;top:${offset}px;left:0;right:0;z-index:1000;transform:translateY(-100%)`;
@@ -94,6 +96,7 @@ export function makeStickyNavbar(element, options = {}) {
 
       placeholder.style.cssText = 'display:none;height:0;visibility:hidden';
 
+      element.classList.remove(STICKY_CLASS_NAME);
       isSticky = false;
       removeTimeout = null;
     }, ANIMATION_DURATION);
@@ -161,6 +164,7 @@ export function makeStickyNavbar(element, options = {}) {
       placeholder.parentNode.removeChild(placeholder);
     }
 
+    element.classList.remove(STICKY_CLASS_NAME);
     isSticky = false;
   };
 }

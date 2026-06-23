@@ -1,47 +1,47 @@
-var V = Object.defineProperty, K = Object.defineProperties;
-var Q = Object.getOwnPropertyDescriptors;
-var N = Object.getOwnPropertySymbols;
-var Z = Object.prototype.hasOwnProperty, J = Object.prototype.propertyIsEnumerable;
-var $ = (e, t, n) => t in e ? V(e, t, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[t] = n, y = (e, t) => {
+var Z = Object.defineProperty, J = Object.defineProperties;
+var ee = Object.getOwnPropertyDescriptors;
+var D = Object.getOwnPropertySymbols;
+var te = Object.prototype.hasOwnProperty, ne = Object.prototype.propertyIsEnumerable;
+var _ = (e, t, n) => t in e ? Z(e, t, { enumerable: !0, configurable: !0, writable: !0, value: n }) : e[t] = n, g = (e, t) => {
   for (var n in t || (t = {}))
-    Z.call(t, n) && $(e, n, t[n]);
-  if (N)
-    for (var n of N(t))
-      J.call(t, n) && $(e, n, t[n]);
+    te.call(t, n) && _(e, n, t[n]);
+  if (D)
+    for (var n of D(t))
+      ne.call(t, n) && _(e, n, t[n]);
   return e;
-}, O = (e, t) => K(e, Q(t));
+}, O = (e, t) => J(e, ee(t));
 var L = (e, t, n) => new Promise((r, o) => {
-  var i = (l) => {
+  var i = (c) => {
     try {
-      a(n.next(l));
-    } catch (c) {
-      o(c);
+      a(n.next(c));
+    } catch (l) {
+      o(l);
     }
-  }, s = (l) => {
+  }, s = (c) => {
     try {
-      a(n.throw(l));
-    } catch (c) {
-      o(c);
+      a(n.throw(c));
+    } catch (l) {
+      o(l);
     }
-  }, a = (l) => l.done ? r(l.value) : Promise.resolve(l.value).then(i, s);
+  }, a = (c) => c.done ? r(c.value) : Promise.resolve(c.value).then(i, s);
   a((n = n.apply(e, t)).next());
 });
-const ee = {
-  setCookie: te,
-  getCookie: ne
+const re = {
+  setCookie: oe,
+  getCookie: ie
 };
-function H() {
+function W() {
   return window.location.hostname === "localhost";
 }
-function te(e, t, n, r = {}) {
+function oe(e, t, n, r = {}) {
   const {
     path: o = "/",
     sameSite: i = "Lax",
     secure: s = window.location.protocol === "https:"
-  } = r, a = n ? `expires=${new Date(Date.now() + n * 864e5).toUTCString()};` : "", l = s ? "Secure;" : "";
-  document.cookie = `${e}=${encodeURIComponent(t)};${a}path=${o};SameSite=${i};${l}`;
+  } = r, a = n ? `expires=${new Date(Date.now() + n * 864e5).toUTCString()};` : "", c = s ? "Secure;" : "";
+  document.cookie = `${e}=${encodeURIComponent(t)};${a}path=${o};SameSite=${i};${c}`;
 }
-function ne(e) {
+function ie(e) {
   const t = `${e}=`, n = document.cookie.split(";");
   for (let r of n)
     if (r = r.trim(), r.startsWith(t))
@@ -55,28 +55,28 @@ function S(e, t, n = !0) {
   });
   return window.dispatchEvent(r), r;
 }
-function re(e = null) {
+function se(e = null) {
   const t = e ? document.querySelector(e) : event.target;
   t.value = t.value.replace(/\D/g, "");
 }
-function A(e, t = "", n = {}) {
+function k(e, t = "", n = {}) {
   var o, i, s;
   let r = (s = (i = (o = window.supersonic) == null ? void 0 : o.i18n) == null ? void 0 : i[e]) != null ? s : t || e;
-  return n && typeof n == "object" && (r = r.replace(/\{(\w+)\}/g, (a, l) => n[l] !== void 0 ? n[l] : a)), r;
+  return n && typeof n == "object" && (r = r.replace(/\{(\w+)\}/g, (a, c) => n[c] !== void 0 ? n[c] : a)), r;
 }
 const B = {
-  validate: oe,
-  validateNumbCaptcha: ae
+  validate: ae,
+  validateNumbCaptcha: ue
 };
-function oe(e) {
+function ae(e) {
   let t = [];
   return e.forEach((n) => {
-    let r = P(n);
+    let r = K(n);
     r && t.push(r);
   }), t;
 }
-function P(e) {
-  let t = A("invalid_email", "Invalid email address"), n = A("required_field", 'This field is required"'), r = e.getAttribute("type"), o = ie(e), i = se(e.value);
+function K(e) {
+  let t = k("invalid_email", "Invalid email address"), n = k("required_field", 'This field is required"'), r = e.getAttribute("type"), o = ce(e), i = le(e.value);
   if (o)
     e.parentNode.classList.remove("error");
   else
@@ -93,14 +93,14 @@ function P(e) {
     field: e
   }) : (e.parentNode.classList.remove("error"), !1);
 }
-function ie(e) {
+function ce(e) {
   let t = e.hasAttribute("required"), n = e.value;
   return !(t && n === "");
 }
-function se(e) {
+function le(e) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(e).toLowerCase());
 }
-function ae(e) {
+function ue(e) {
   let t = document.getElementById(e);
   if (!t) return !0;
   let n = t.querySelector("input[name='numb_captcha']");
@@ -110,11 +110,11 @@ function ae(e) {
   let i = r.value, s = o.value, a = n.value;
   return a === "" ? !1 : Number(i) + Number(s) === Number(a);
 }
-function k(e) {
+function A(e) {
   return document.getElementById(e).querySelectorAll("input, select, textarea, file");
 }
-function le(e, t = null) {
-  let n = k(e), r = new FormData();
+function de(e, t = null) {
+  let n = A(e), r = new FormData();
   if (t)
     for (const o in t) r.append(o, t[o]);
   return n.forEach((o) => {
@@ -122,18 +122,18 @@ function le(e, t = null) {
     i === "file" ? r.append(s, o.files[0]) : i === "checkbox" ? o.checked && r.append(s, o.value) : r.append(s, o.value);
   }), r;
 }
-function ce(e) {
-  k(e).forEach((n) => {
+function fe(e) {
+  A(e).forEach((n) => {
     let r = n.getAttribute("type");
     r !== "submit" && r !== "hidden" && r !== "button" && (n.value = ""), r == "checkbox" && (n.checked = !1);
   });
 }
-function ue(e) {
+function me(e) {
   e.forEach((t) => {
-    z(t);
+    G(t);
   });
 }
-function z(e) {
+function G(e) {
   let t = null;
   if (e.field instanceof Element)
     t = e.field;
@@ -145,12 +145,12 @@ function z(e) {
   let n = document.createElement("span");
   n.classList.add("error-message"), n.innerHTML = e.error, t.parentNode.appendChild(n);
 }
-function de(e) {
+function pe(e) {
   e.forEach((t) => {
-    W(t);
+    V(t);
   });
 }
-function W(e) {
+function V(e) {
   let t = null;
   if (e instanceof Element)
     t = e;
@@ -165,12 +165,12 @@ function W(e) {
   n && n.remove();
 }
 function q(e) {
-  W(e);
-  let t = P(e);
-  t && z(t);
+  V(e);
+  let t = K(e);
+  t && G(t);
 }
-function fe(e) {
-  k(e).forEach((n) => {
+function he(e) {
+  A(e).forEach((n) => {
     n.dataset.supersonicWatchBound !== "true" && (n.addEventListener("keyup", () => {
       q(n);
     }), n.addEventListener("change", () => {
@@ -180,7 +180,7 @@ function fe(e) {
     }), n.dataset.supersonicWatchBound = "true");
   });
 }
-function me(e) {
+function ye(e) {
   let t = document.getElementById(e);
   if (!t || t.dataset.supersonicCaptchaInit === "true") return;
   let n = t.querySelector("input[name='numb_captcha']");
@@ -192,13 +192,13 @@ function me(e) {
   let s = document.createElement("input");
   s.setAttribute("type", "hidden"), s.setAttribute("name", "num2"), s.setAttribute("value", o), t.appendChild(s), t.dataset.supersonicCaptchaInit = "true";
 }
-function pe(e) {
+function ge(e) {
   return e.status === "success" || e.code === 200 || e.code === "success" || e.status === 200 || e.code === "ok" || e.code === "OK";
 }
-function he(e) {
+function we(e) {
   return e.status === "error" || e.code === 400 || e.code === "error" || e.status === 400 || e.code === "error" || e.code === "ERROR";
 }
-function _(e, t) {
+function M(e, t) {
   Swal.fire({
     toast: !0,
     position: "top-end",
@@ -208,30 +208,30 @@ function _(e, t) {
     timer: 3e3
   });
 }
-function ye(e) {
+function ve(e) {
   e && Array.isArray(e) ? e.forEach((n) => {
-    _("error", n);
-  }) : typeof e == "string" && _("error", e);
+    M("error", n);
+  }) : typeof e == "string" && M("error", e);
 }
-function ge(e, t = "#333") {
+function be(e, t = "#333") {
   Swal.fire({
     html: e,
     icon: "error",
-    confirmButtonText: A("ok", "OK"),
+    confirmButtonText: k("ok", "OK"),
     confirmButtonColor: t
   });
 }
-function ve(e, t = "#333") {
+function Ee(e, t = "#333") {
   Swal.fire({
     html: e,
     icon: "success",
-    confirmButtonText: A("ok", "OK"),
+    confirmButtonText: k("ok", "OK"),
     confirmButtonColor: t
   });
 }
-function M(e) {
-  if (H() && console.log(e), e.fields && de(e.fields), e.clientSideErrors && e.clientSideErrors.length > 0) {
-    ue(e.clientSideErrors);
+function R(e) {
+  if (W() && console.log(e), e.fields && pe(e.fields), e.clientSideErrors && e.clientSideErrors.length > 0) {
+    me(e.clientSideErrors);
     return;
   }
   if (e.errors && e.errors.length > 0) {
@@ -239,21 +239,21 @@ function M(e) {
     });
     return;
   }
-  if (he(e) && (S("supersonic:AjaxResponseError", e), e.responseType == "swal" && Swal && (e.message ? ye(e.message) : e.body && ge(e.body, "#333"))), pe(e)) {
+  if (we(e) && (S("supersonic:AjaxResponseError", e), e.responseType == "swal" && Swal && (e.message ? ve(e.message) : e.body && be(e.body, "#333"))), ge(e)) {
     if (S("supersonic:AjaxResponseSuccess", e), e.responseType == "swal" && Swal) {
       let t = e.body ? e.body : `<p>${e.message}</p>`;
-      ve(t, "#333");
+      Ee(t, "#333");
     }
     setTimeout(() => {
-      ce(e.form_css_id);
+      fe(e.form_css_id);
     }, 300);
   }
 }
-function R() {
+function Y() {
   return L(this, arguments, function* (e = {}, t = null) {
-    var x, I, C, F, D;
+    var I, C, N, F, $;
     t.preventDefault();
-    let n = (x = e.method) != null ? x : "POST", r = (I = e.data) != null ? I : null, o = e.submitButton ? document.querySelector(e.submitButton) : t.target, i = (C = e.formId) != null ? C : null, s = (F = e.ajaxUrl) != null ? F : null, a = e.indicator ? document.querySelector(e.indicator) : null, l = !!(e.recaptcha && e.recaptcha != "false"), c = e.recaptcha_site_key ? e.recaptcha_site_key : null, u = (D = e.responseType) != null ? D : "default", d = e.callback ? e.callback : null;
+    let n = (I = e.method) != null ? I : "POST", r = (C = e.data) != null ? C : null, o = e.submitButton ? document.querySelector(e.submitButton) : t.target, i = (N = e.formId) != null ? N : null, s = (F = e.ajaxUrl) != null ? F : null, a = e.indicator ? document.querySelector(e.indicator) : null, c = !!(e.recaptcha && e.recaptcha != "false"), l = e.recaptcha_site_key ? e.recaptcha_site_key : null, u = ($ = e.responseType) != null ? $ : "default", d = e.callback ? e.callback : null;
     if (!i) {
       console.error("Form ID is required");
       return;
@@ -263,43 +263,43 @@ function R() {
       return;
     }
     o && o.setAttribute("disabled", "disabled");
-    let m = document.getElementById(i);
-    const h = k(i);
+    let f = document.getElementById(i);
+    const p = A(i);
     a && a.classList.remove("hidden");
-    let p = B.validate(h);
+    let m = B.validate(p);
     if (!B.validateNumbCaptcha(i)) {
-      let w = m.querySelector("input[name='numb_captcha']");
-      p.push({
+      let v = f.querySelector("input[name='numb_captcha']");
+      m.push({
         name: "numb_captcha",
         error: "Invalid captcha",
         formId: i,
-        field: w
+        field: v
       });
     }
-    if (p.length > 0)
-      return o.removeAttribute("disabled"), a && a.classList.add("hidden"), M({ clientSideErrors: p });
-    let E = le(i);
+    if (m.length > 0)
+      return o.removeAttribute("disabled"), a && a.classList.add("hidden"), R({ clientSideErrors: m });
+    let E = de(i);
     if (r)
-      for (const w in r) E.append(w, r[w]);
-    if (l && c) {
-      let w = yield grecaptcha.execute(c, { action: "submit" });
-      E.append("recaptcha_response", w);
+      for (const v in r) E.append(v, r[v]);
+    if (c && l) {
+      let v = yield grecaptcha.execute(l, { action: "submit" });
+      E.append("recaptcha_response", v);
     }
     if (S("astronomic:FormSubmitBefore", E).defaultPrevented) {
       a && (a.classList.add("uk-hidden"), a.classList.add("hidden"), o.removeAttribute("disabled"));
       return;
     }
-    let v = yield (yield fetch(s, {
+    let w = yield (yield fetch(s, {
       method: n,
       cache: "no-cache",
       body: E
     })).json();
-    return v.form_css_id = i, v.responseType = u, d ? d(v) : M(v), S("astronomic:FormSubmitAfter", v), a && (a.classList.add("uk-hidden"), a.classList.add("hidden")), setTimeout(() => {
+    return w.form_css_id = i, w.responseType = u, d ? d(w) : R(w), S("astronomic:FormSubmitAfter", w), a && (a.classList.add("uk-hidden"), a.classList.add("hidden")), setTimeout(() => {
       o.removeAttribute("disabled");
-    }, 2e3), v;
+    }, 2e3), w;
   });
 }
-const we = {
+const Se = {
   formId: null,
   submitButton: null,
   data: null,
@@ -311,9 +311,9 @@ const we = {
   responseType: "default",
   callback: null
 };
-class be {
+class ke {
   constructor(t = {}) {
-    if (this.options = y(y({}, we), t), !this.options.formId) {
+    if (this.options = g(g({}, Se), t), !this.options.formId) {
       console.error("Form ID is required. Please provide a valid form ID.");
       return;
     }
@@ -325,7 +325,7 @@ class be {
       console.error("Ajax URL is required. Please provide a valid URL.");
       return;
     }
-    fe(this.options.formId), me(this.options.formId), this.init();
+    he(this.options.formId), ye(this.options.formId), this.init();
   }
   /**
    * Submit form on button click or form submit
@@ -339,15 +339,15 @@ class be {
       }
       t.forEach((r) => {
         r.dataset.supersonicFormBound !== "true" && (r.addEventListener("click", (o) => {
-          o.preventDefault(), R(this.options, o);
+          o.preventDefault(), Y(this.options, o);
         }), r.dataset.supersonicFormBound = "true");
       }), n && n.dataset.supersonicFormSubmitBound !== "true" && (n.addEventListener("submit", (r) => {
-        r.preventDefault(), R(this.options, r);
+        r.preventDefault(), Y(this.options, r);
       }), n.dataset.supersonicFormSubmitBound = "true");
     });
   }
 }
-function Ee(e) {
+function Ae(e) {
   if (e) {
     if (!e || !/^GTM-[A-Z0-9]+$/.test(e)) {
       console.error("Invalid GTM ID");
@@ -368,36 +368,36 @@ function Ee(e) {
     }
   }
 }
-function Se() {
+function Le() {
   return new Promise((e, t) => {
     if (window.Swal) return e(window.Swal);
     const n = document.createElement("script");
     n.src = "https://cdn.jsdelivr.net/npm/sweetalert2@11", n.defer = !0, n.onload = () => e(window.Swal), n.onerror = t, document.head.appendChild(n);
   });
 }
-function Ae(e, { duration: t = 1500, decimals: n = 0 } = {}) {
+function qe(e, { duration: t = 1500, decimals: n = 0 } = {}) {
   const r = +e.dataset.countTo || 0, o = 0, i = performance.now(), s = new Intl.NumberFormat(void 0, {
     minimumFractionDigits: n,
     maximumFractionDigits: n
   });
-  function a(l) {
-    const c = Math.min((l - i) / t, 1), u = 1 - Math.pow(1 - c, 3), d = o + (r - o) * u;
-    e.textContent = s.format(c < 1 ? d : r), c < 1 && requestAnimationFrame(a);
+  function a(c) {
+    const l = Math.min((c - i) / t, 1), u = 1 - Math.pow(1 - l, 3), d = o + (r - o) * u;
+    e.textContent = s.format(l < 1 ? d : r), l < 1 && requestAnimationFrame(a);
   }
   requestAnimationFrame(a);
 }
-const ke = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+const Te = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
   __proto__: null,
-  counter: Ae
+  counter: qe
 }, Symbol.toStringTag, { value: "Module" }));
-function Le(e) {
+function xe(e) {
   const t = e.selector, n = e.root || null, r = e.rootMargin || "0px", o = e.threshold || 0.2, i = e.repeat || !1, s = e.onEnter || null, a = document.querySelectorAll(t);
   if (!a.length) {
     console.warn(`No elements found with selector "${t}".`);
     return;
   }
-  const l = new IntersectionObserver((c, u) => {
-    c.forEach((d) => {
+  const c = new IntersectionObserver((l, u) => {
+    l.forEach((d) => {
       d.isIntersecting ? (d.target.classList.add("in-view"), s && typeof s == "function" && s(d.target, d), i || u.unobserve(d.target)) : i && d.target.classList.remove("in-view");
     });
   }, {
@@ -408,22 +408,22 @@ function Le(e) {
     threshold: o
     // Percentage of element visibility to trigger
   });
-  a.forEach((c) => l.observe(c));
+  a.forEach((l) => c.observe(l));
 }
-function qe(e) {
-  const n = y(y({}, {
+function Ie(e) {
+  const n = g(g({}, {
     selector: "[data-viewport-animation]",
     root: null,
     rootMargin: "0px",
     threshold: 0.1,
     repeat: !1
-  }), e), { selector: r, root: o, rootMargin: i, threshold: s, repeat: a } = n, l = document.querySelectorAll(r);
-  if (!l.length)
+  }), e), { selector: r, root: o, rootMargin: i, threshold: s, repeat: a } = n, c = document.querySelectorAll(r);
+  if (!c.length)
     return;
-  const c = new IntersectionObserver((u, d) => {
+  const l = new IntersectionObserver((u, d) => {
     requestAnimationFrame(() => {
-      u.forEach((m) => {
-        m.isIntersecting ? (m.target.classList.add("in-view"), j(m.target, !0), a || d.unobserve(m.target)) : a && (m.target.classList.remove("in-view"), j(m.target, !1));
+      u.forEach((f) => {
+        f.isIntersecting ? (f.target.classList.add("in-view"), U(f.target, !0), a || d.unobserve(f.target)) : a && (f.target.classList.remove("in-view"), U(f.target, !1));
       });
     });
   }, {
@@ -434,66 +434,66 @@ function qe(e) {
     threshold: s
     // Percentage of element visibility to trigger
   });
-  l.forEach((u) => c.observe(u));
+  c.forEach((u) => l.observe(u));
 }
-function Te(e) {
+function Ce(e) {
   const t = {};
   return e && e.split(";").forEach((n) => {
     const [r, o] = n.split(":");
     r && o && (t[r.trim()] = o.trim());
   }), t;
 }
-const Y = (e, t) => {
-  const n = e.getAttribute("data-viewport-animation"), r = Te(n), o = r.animation;
+const j = (e, t) => {
+  const n = e.getAttribute("data-viewport-animation"), r = Ce(n), o = r.animation;
   if (!o) return;
   let i = r.delay ? `${r.delay}ms` : "0ms", s = r.duration ? `${r.duration}ms` : "";
   t ? (e.style.animationDelay = i, e.style.animationDuration = s, e.classList.add("animate", o)) : (e.style.animationDelay = "", e.style.animationDuration = "", e.classList.remove("animate", o));
-}, j = (e, t) => {
-  Y(e, t), e.querySelectorAll("[data-viewport-animation]").forEach((n) => {
-    Y(n, t);
+}, U = (e, t) => {
+  j(e, t), e.querySelectorAll("[data-viewport-animation]").forEach((n) => {
+    j(n, t);
   });
-}, U = 300, xe = 50;
-function Ie(e, t = {}) {
+}, H = 300, Ne = 50, T = "is-sticky";
+function Fe(e, t = {}) {
   const {
     threshold: n = 100,
     offset: r = 0,
     stickyOnTop: o = !1
   } = t;
-  let i = 0, s = null, a = null, l = !1, c = null;
+  let i = 0, s = null, a = null, c = !1, l = null;
   const u = document.createElement("div");
-  u.className = "sticky-navbar-placeholder", u.style.cssText = "display:none;height:0;visibility:hidden", e.parentNode.insertBefore(u, e.nextSibling), e.style.transition = `transform ${U}ms ease-out`;
+  u.className = "sticky-navbar-placeholder", u.style.cssText = "display:none;height:0;visibility:hidden", e.parentNode.insertBefore(u, e.nextSibling), e.style.transition = `transform ${H}ms ease-out`;
   function d() {
-    l || (c || (c = e.offsetHeight), l = !0, e.style.cssText += `position:fixed;top:${r}px;left:0;right:0;z-index:1000;transform:translateY(-100%)`, u.style.cssText = `display:block;height:${c}px;visibility:hidden`, requestAnimationFrame(() => {
+    c || (l || (l = e.offsetHeight), c = !0, e.classList.add(T), e.style.cssText += `position:fixed;top:${r}px;left:0;right:0;z-index:1000;transform:translateY(-100%)`, u.style.cssText = `display:block;height:${l}px;visibility:hidden`, requestAnimationFrame(() => {
       requestAnimationFrame(() => {
-        l && (e.style.transform = "translateY(0)");
+        c && (e.style.transform = "translateY(0)");
       });
     }));
   }
-  function m() {
-    l && (a && clearTimeout(a), e.style.transform = "translateY(-100%)", a = setTimeout(() => {
-      if (!l) return;
-      const p = e.style.transition;
-      e.style.cssText = "", e.style.transition = p, u.style.cssText = "display:none;height:0;visibility:hidden", l = !1, a = null;
-    }, U));
+  function f() {
+    c && (a && clearTimeout(a), e.style.transform = "translateY(-100%)", a = setTimeout(() => {
+      if (!c) return;
+      const m = e.style.transition;
+      e.style.cssText = "", e.style.transition = m, u.style.cssText = "display:none;height:0;visibility:hidden", e.classList.remove(T), c = !1, a = null;
+    }, H));
   }
-  function h() {
+  function p() {
     s && clearTimeout(s), s = setTimeout(() => {
-      const p = window.pageYOffset || document.documentElement.scrollTop;
-      if (p <= n) {
-        l && m(), i = p;
+      const m = window.pageYOffset || document.documentElement.scrollTop;
+      if (m <= n) {
+        c && f(), i = m;
         return;
       }
-      if (p === i)
+      if (m === i)
         return;
-      const g = p < i;
-      o ? g && !l ? d() : !g && l && m() : l || d(), i = p;
-    }, xe);
+      const y = m < i;
+      o ? y && !c ? d() : !y && c && f() : c || d(), i = m;
+    }, Ne);
   }
-  return window.addEventListener("scroll", h, { passive: !0 }), () => {
-    window.removeEventListener("scroll", h), s && (clearTimeout(s), s = null), a && (clearTimeout(a), a = null), u && u.parentNode && u.parentNode.removeChild(u), l = !1;
+  return window.addEventListener("scroll", p, { passive: !0 }), () => {
+    window.removeEventListener("scroll", p), s && (clearTimeout(s), s = null), a && (clearTimeout(a), a = null), u && u.parentNode && u.parentNode.removeChild(u), e.classList.remove(T), c = !1;
   };
 }
-function Ce(e) {
+function $e(e) {
   const t = {};
   return !e || e === "" || e.split(";").forEach((n) => {
     const [r, o] = n.split(":");
@@ -503,18 +503,56 @@ function Ce(e) {
     }
   }), t;
 }
-function Fe(e = "[data-navbar-sticky]") {
+function De(e = "[data-navbar-sticky]") {
   const t = document.querySelector(e);
   if (!t)
     return null;
-  const n = Ce(t.getAttribute("data-navbar-sticky")), r = {
+  const n = $e(t.getAttribute("data-navbar-sticky")), r = {
     threshold: n.threshold ? parseInt(n.threshold) : 100,
     offset: n.offset ? parseInt(n.offset) : 0,
     stickyOnTop: n.stickyOnTop === !0
   };
-  return Ie(t, r);
+  return Fe(t, r);
 }
-class De {
+const z = "is-sticky";
+function _e(e) {
+  const t = {};
+  return !e || e === "" || e.split(";").forEach((n) => {
+    const [r, o] = n.split(":");
+    if (!r || !o)
+      return;
+    const i = r.trim(), s = o.trim();
+    s === "true" ? t[i] = !0 : s === "false" ? t[i] = !1 : Number.isNaN(Number(s)) ? t[i] = s : t[i] = Number(s);
+  }), t;
+}
+function P(e = "[data-sticky]") {
+  const t = Array.from(document.querySelectorAll(e));
+  if (!t.length)
+    return [];
+  const n = () => window.matchMedia("(min-width: 1024px)").matches;
+  return t.map((o) => {
+    var p;
+    const i = o.getAttribute("data-sticky"), a = (p = _e(i).offset) != null ? p : 0, c = o.offsetTop;
+    let l = !1;
+    const u = () => {
+      const m = o.parentElement, y = m ? m.getBoundingClientRect() : null;
+      o.classList.add(z), o.style.position = "fixed", o.style.top = `${a}px`, o.style.zIndex = "1000", y ? (o.style.left = `${y.left}px`, o.style.width = `${y.width}px`) : (o.style.left = "0", o.style.width = "100%");
+    }, d = () => {
+      o.classList.remove(z), o.style.position = "", o.style.top = "", o.style.left = "", o.style.zIndex = "", o.style.width = "";
+    }, f = () => {
+      if (!n()) {
+        l && (d(), l = !1);
+        return;
+      }
+      const m = window.scrollY >= c - a;
+      m && !l ? (u(), l = !0) : !m && l && (d(), l = !1);
+    };
+    return f(), window.addEventListener("scroll", f, { passive: !0 }), window.addEventListener("resize", f), () => {
+      window.removeEventListener("scroll", f), window.removeEventListener("resize", f), d();
+    };
+  });
+}
+class Oe {
   constructor(t) {
     this.element = t, this.trigger = t.querySelector("a, button"), this.menu = this.trigger ? this.trigger.nextElementSibling : null, this.icon = t.querySelector("svg"), this.isOpen = !1, this.position = t.dataset.dropdown || "center", this.handleClickAway = this.handleClickAway.bind(this), this.handleEscape = this.handleEscape.bind(this), this.handleTriggerClick = this.handleTriggerClick.bind(this), this.init();
   }
@@ -567,51 +605,51 @@ class De {
     this.trigger && this.trigger.removeEventListener("click", this.handleTriggerClick), document.removeEventListener("click", this.handleClickAway), document.removeEventListener("keydown", this.handleEscape);
   }
 }
-const Ne = /* @__PURE__ */ new WeakMap();
-function $e() {
+const Be = /* @__PURE__ */ new WeakMap();
+function Me() {
   document.querySelectorAll("[data-dropdown]").forEach((t) => {
-    const n = new De(t);
-    Ne.set(t, n);
+    const n = new Oe(t);
+    Be.set(t, n);
   });
 }
 const b = /* @__PURE__ */ new Set();
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && b.size > 0) {
     const t = Array.from(b).pop();
-    T(t);
+    x(t);
   }
 });
-function G(e, t, n, r, o) {
+function X(e, t, n, r, o) {
   const i = performance.now();
   function s(a) {
-    const l = a - i, c = Math.min(l / r, 1), u = t + (n - t) * c;
-    e.style.transform = `translateX(${u}%)`, c < 1 ? requestAnimationFrame(s) : o();
+    const c = a - i, l = Math.min(c / r, 1), u = t + (n - t) * l;
+    e.style.transform = `translateX(${u}%)`, l < 1 ? requestAnimationFrame(s) : o();
   }
   requestAnimationFrame(s);
 }
-function Oe() {
+function Re() {
   document.querySelectorAll("[data-drawer]").forEach((t) => {
     const n = t.getAttribute("data-drawer"), r = document.querySelectorAll(`[data-drawer-trigger="${n}"]`), o = document.querySelectorAll(`[data-drawer-close="${n}"]`);
     r.forEach((s) => {
-      s.addEventListener("click", () => Be(n));
+      s.addEventListener("click", () => Ye(n));
     }), o.forEach((s) => {
-      s.addEventListener("click", () => T(n));
+      s.addEventListener("click", () => x(n));
     }), t.querySelectorAll("a").forEach((s) => {
       s.addEventListener("click", (a) => {
-        s.closest("li[data-submenu]") || _e(n);
+        s.closest("li[data-submenu]") || je(n);
       });
     });
   });
 }
-function Be(e) {
+function Ye(e) {
   const t = document.querySelector(`[data-drawer="${e}"]`);
-  if (t && (b.add(e), t.style.display = "block", t.style.position = "fixed", t.style.top = "0", t.style.left = "0", t.style.zIndex = "1002", t.style.transform = "translateX(-100%)", document.body.style.overflowY = "hidden", G(t, -100, 0, 200, () => {
+  if (t && (b.add(e), t.style.display = "block", t.style.position = "fixed", t.style.top = "0", t.style.left = "0", t.style.zIndex = "1002", t.style.transform = "translateX(-100%)", document.body.style.overflowY = "hidden", X(t, -100, 0, 200, () => {
   }), t.getAttribute("data-drawer-overlay") === "true")) {
     let n = document.createElement("div");
-    n.className = "drawer-overlay", n.style.position = "fixed", n.style.top = "0", n.style.left = "0", n.style.width = "100vw", n.style.height = "100vh", n.style.background = "rgba(0,0,0,0.5)", n.style.zIndex = "999", n.setAttribute("data-drawer-overlay", "true"), n.addEventListener("click", () => T(e)), document.body.prepend(n);
+    n.className = "drawer-overlay", n.style.position = "fixed", n.style.top = "0", n.style.left = "0", n.style.width = "100vw", n.style.height = "100vh", n.style.background = "rgba(0,0,0,0.5)", n.style.zIndex = "999", n.setAttribute("data-drawer-overlay", "true"), n.addEventListener("click", () => x(e)), document.body.prepend(n);
   }
 }
-function _e(e) {
+function je(e) {
   const t = document.querySelector(`[data-drawer="${e}"]`);
   if (t) {
     if (b.delete(e), t.style.display = "none", t.style.position = "", t.style.top = "", t.style.left = "", t.style.zIndex = "", t.style.transform = "", t.getAttribute("data-drawer-overlay") === "true") {
@@ -621,10 +659,10 @@ function _e(e) {
     document.body.style.overflowY = "";
   }
 }
-function T(e) {
+function x(e) {
   const t = document.querySelector(`[data-drawer="${e}"]`);
   if (t) {
-    if (b.delete(e), G(t, 0, -100, 300, () => {
+    if (b.delete(e), X(t, 0, -100, 300, () => {
       t.style.display = "none", t.style.position = "", t.style.top = "", t.style.left = "", t.style.zIndex = "", t.style.transform = "";
     }), t.getAttribute("data-drawer-overlay") === "true") {
       const n = document.querySelector('.drawer-overlay[data-drawer-overlay="true"]');
@@ -633,28 +671,28 @@ function T(e) {
     document.body.style.overflowY = "";
   }
 }
-function Me() {
+function Ue() {
   document.querySelectorAll("[data-submenu]").forEach((t) => {
     const n = t.querySelector("a"), r = t.querySelector("ul"), o = n == null ? void 0 : n.querySelector("svg");
     !n || !r || (r.style.display = "none", n.addEventListener("click", (i) => {
-      i.preventDefault(), Re(t, r, o);
+      i.preventDefault(), He(t, r, o);
     }));
   });
 }
-function Re(e, t, n) {
+function He(e, t, n) {
   e.classList.contains("open") ? (t.style.display = "none", e.classList.remove("open"), n && (n.style.transform = "rotate(0deg)")) : (t.style.display = "block", e.classList.add("open"), n && (n.style.transform = "rotate(180deg)"));
 }
-function Ye(e) {
+function ze(e) {
   const t = {};
   return e && e.split(";").forEach((n) => {
     const [r, o] = n.split(":");
     r && o && (t[r.trim()] = o.trim());
   }), t;
 }
-function je() {
+function Pe() {
   document.querySelectorAll("[data-scroll]").forEach((e) => {
     e.addEventListener("click", function(t) {
-      const n = Ye(e.getAttribute("data-scroll"));
+      const n = ze(e.getAttribute("data-scroll"));
       let r = n.target || e.getAttribute("href");
       if (r && (r.startsWith("#") || r.startsWith("/#"))) {
         r.startsWith("/#") && (r = r.slice(1));
@@ -664,13 +702,13 @@ function je() {
           let i = n.offset && parseInt(n.offset, 10) || 0, s = n.speed ? parseFloat(n.speed) : 0;
           const a = o.getBoundingClientRect().top + window.scrollY - i;
           if (s > 0) {
-            let d = function(h) {
-              const p = h - u, g = Math.min(p / s, 1);
-              window.scrollTo(0, l + c * m(g)), g < 1 && requestAnimationFrame(d);
-            }, m = function(h) {
-              return h < 0.5 ? 2 * h * h : -1 + (4 - 2 * h) * h;
+            let d = function(p) {
+              const m = p - u, y = Math.min(m / s, 1);
+              window.scrollTo(0, c + l * f(y)), y < 1 && requestAnimationFrame(d);
+            }, f = function(p) {
+              return p < 0.5 ? 2 * p * p : -1 + (4 - 2 * p) * p;
             };
-            const l = window.scrollY, c = a - l, u = performance.now();
+            const c = window.scrollY, l = a - c, u = performance.now();
             requestAnimationFrame(d);
           } else
             window.scrollTo({
@@ -682,7 +720,7 @@ function je() {
     });
   });
 }
-function Ue() {
+function We() {
   document.querySelectorAll("[data-accordion]").forEach((t) => {
     if (t.dataset.supersonicAccordionInit === "true") return;
     t.dataset.supersonicAccordionInit = "true";
@@ -697,60 +735,64 @@ function Ue() {
       if (s && a) {
         if (i.dataset.supersonicAccordionBound === "true") return;
         i.dataset.supersonicAccordionBound = "true", a.style.maxHeight = i.classList.contains("open") ? `${a.scrollHeight}px` : "0", a.style.transition = "max-height 0.3s ease-out", s.addEventListener("click", () => {
-          const c = i.classList.contains("open");
-          r.multiple ? c ? (i.classList.remove("open"), a.style.maxHeight = "0") : (i.classList.add("open"), a.style.maxHeight = `${a.scrollHeight}px`) : (o.forEach((u) => {
+          const l = i.classList.contains("open");
+          r.multiple ? l ? (i.classList.remove("open"), a.style.maxHeight = "0") : (i.classList.add("open"), a.style.maxHeight = `${a.scrollHeight}px`) : (o.forEach((u) => {
             u.classList.remove("open");
             const d = u.querySelector(".accordion-content");
             d && (d.style.maxHeight = "0");
-          }), c || (i.classList.add("open"), a.style.maxHeight = `${a.scrollHeight}px`));
+          }), l || (i.classList.add("open"), a.style.maxHeight = `${a.scrollHeight}px`));
         });
-        const l = i.querySelector("[data-accordion-close]");
-        l && l.addEventListener("click", (c) => {
-          c.stopPropagation(), i.classList.remove("open"), a.style.maxHeight = "0";
+        const c = i.querySelector("[data-accordion-close]");
+        c && c.addEventListener("click", (l) => {
+          l.stopPropagation(), i.classList.remove("open"), a.style.maxHeight = "0";
         });
       }
     });
   });
 }
-const f = typeof window != "undefined" ? window : globalThis;
-f.supersonic || (f.supersonic = {});
-f.supersonic.init = X;
-function X(e = {}) {
+const h = typeof window != "undefined" ? window : globalThis;
+h.supersonic || (h.supersonic = {});
+h.supersonic.init = Q;
+function Q(e = {}) {
   const t = {
     i18n: {},
     lang: document.documentElement.lang || "en",
     gtm: null,
     swal: !1
-  }, n = y(y({}, t), e);
-  f.supersonic = O(y(y({}, f.supersonic), n), {
-    init: X
-  }), f.supersonic.newForm = be, f.supersonic.isLocal = H(), f.supersonic.utility = ee, f.supersonic.animations = ke, f.supersonic.ui = {}, f.supersonic.ui.observeElement = Le, f.supersonic.ui.onlyAllowNumbers = re;
+  }, n = g(g({}, t), e);
+  h.supersonic = O(g(g({}, h.supersonic), n), {
+    init: Q
+  }), h.supersonic.newForm = ke, h.supersonic.isLocal = W(), h.supersonic.utility = re, h.supersonic.animations = Te, h.supersonic.ui = {}, h.supersonic.ui.observeElement = xe, h.supersonic.ui.onlyAllowNumbers = se;
   const r = [
-    { name: "gtm", function: () => Ee(f.supersonic.gtm) },
+    { name: "gtm", function: () => Ae(h.supersonic.gtm) },
     // Google Tag Manager
-    { name: "swal", function: () => Se() },
+    { name: "swal", function: () => Le() },
     // Load SweetAlert library
-    { name: "stickyNavbar", function: () => Fe() },
+    { name: "stickyNavbar", function: () => De() },
     // Sticky navbar
-    { name: "viewportAnimations", function: () => qe() },
+    { name: "sticky", function: () => P() },
+    // Generic sticky elements
+    { name: "viewportAnimations", function: () => Ie() },
     // Viewport animations
-    { name: "dropdowns", function: () => $e() },
+    { name: "dropdowns", function: () => Me() },
     // Dropdowns
-    { name: "drawers", function: () => Oe() },
+    { name: "drawers", function: () => Re() },
     // Drawers
-    { name: "submenus", function: () => Me() },
+    { name: "submenus", function: () => Ue() },
     // Submenus
-    { name: "scroll", function: () => je() },
+    { name: "scroll", function: () => Pe() },
     // Smooth scroll
-    { name: "accordions", function: () => Ue() }
+    { name: "accordions", function: () => We() },
     // Accordions
+    { ane: "sticky", function: () => P() }
+    // Sticky elements
   ], o = () => {
     r.forEach((s) => {
       s.function();
     });
   };
-  document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", o, { once: !0 }) : o(), f.__supersonicLifecycleBound || (document.addEventListener("astro:after-swap", o), document.addEventListener("astro:page-load", o), document.addEventListener("htmx:afterSwap", o), document.addEventListener("htmx:afterSettle", o), document.addEventListener("htmx:afterRequest", o), f.__supersonicLifecycleBound = !0);
+  document.readyState === "loading" ? document.addEventListener("DOMContentLoaded", o, { once: !0 }) : o(), h.__supersonicLifecycleBound || (document.addEventListener("astro:after-swap", o), document.addEventListener("astro:page-load", o), document.addEventListener("htmx:afterSwap", o), document.addEventListener("htmx:afterSettle", o), document.addEventListener("htmx:afterRequest", o), h.__supersonicLifecycleBound = !0);
 }
 export {
-  X as init
+  Q as init
 };

@@ -1,0 +1,45 @@
+---
+title: Sticky
+description: Make elements stick to the top of their parent container on desktop while scrolling, using the data-sticky attribute and an optional offset.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components';
+
+The Sticky utility makes any element stick to the top of its parent container once it reaches the top of the viewport on desktop screens. While active, it adds the `is-sticky` class so you can style the pinned state.
+
+You can preview the behavior in the <a href="/playground/sticky" target="_blank">Playground</a>.
+
+## Usage
+
+Add the `data-sticky` attribute to any element you want to pin while scrolling. Place it inside a parent container so it sticks relative to that container instead of the whole page.
+
+```html
+<section class="relative">
+  <div data-sticky="offset:20" class="bg-white p-4 shadow-sm">
+    Sidebar heading
+  </div>
+</section>
+```
+
+## Options
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `offset` | number | `0` | Distance from the top of the viewport before the element becomes sticky. |
+
+## Behavior
+
+- Runs only on desktop screens (`min-width: 1024px`).
+- Sticks to the top of the nearest parent container.
+- Applies the `is-sticky` class while the element is pinned.
+- Removes the sticky state when scrolling back above the trigger point.
+
+## Styling
+
+You can style the active state with the `is-sticky` class:
+
+```css
+.is-sticky {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+```
