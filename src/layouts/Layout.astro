@@ -14,20 +14,36 @@ const scriptSrc = !isDev ? "/js/supersonic.umd.js" : "/src/js/init.js";
 <html lang="en" class="overflow-x-hidden">
   <head>
     <meta charset="utf-8" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
     <meta name="viewport" content="width=device-width" />
+
     <title>{title}</title>
+
     <script type="module" src={scriptSrc}></script>
+
     {!isDev && <script type="module" src="/init.js" />}
+
+    <!-- load swiper from CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+      defer></script>
   </head>
   <body class="overflow-x-hidden min-h-screen">
-    <div class="flex min-h-screen">
-      <div class="w-1/6 min-h-screen">
-        <div class="fixed left-0 bg-gray-100 h-screen w-1/6 py-5 px-10">
+    <div class="xl:flex min-h-screen">
+      <div class="lg:w-1/6 xl:min-h-screen">
+        <div
+          class="fixed left-0 bg-gray-100 h-screen w-1/6 py-5 px-10 max-xl:hidden"
+        >
           <Sidebar />
         </div>
       </div>
-      <div class="flex-1 min-h-screen bg-white">
+      <div class="flex-1 xl:min-h-screen bg-white">
         <main class="py-10 space-y-10">
           <div class="container space-y-10">
             <h1 class="text-5xl mb-10">{title}</h1>
