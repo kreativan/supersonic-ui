@@ -1,0 +1,115 @@
+---
+title: Swiper
+description: Add touch-friendly, responsive carousels to your Astro site by loading Swiper.js and using Supersonic’s Swiper Astro component.
+---
+
+Swiper.js must be loaded in your project before Supersonic's Astro Swiper component can initialize. The component itself only renders the slider markup and creates a `new Swiper(...)` instance, so the Swiper CSS and JS bundle must be present on the page.
+
+## Include Swiper in your project
+
+### CDN example
+
+Add both the stylesheet and the script in your page or layout head:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
+```
+
+If you are using Astro, place this in your layout head so it is available before the component renders.
+
+## Basic usage
+
+```astro
+---
+import { Swiper, SwiperItem } from "../../components/swiper/index.ts";
+---
+
+<Swiper id="hero-slider" desktop={3} tablet={2} mobile={1} gap={20}>
+  <SwiperItem>
+    <div class="card">Slide 1</div>
+  </SwiperItem>
+  <SwiperItem>
+    <div class="card">Slide 2</div>
+  </SwiperItem>
+  <SwiperItem>
+    <div class="card">Slide 3</div>
+  </SwiperItem>
+</Swiper>
+```
+
+## Swiper Astro component API
+
+The `Swiper` component accepts the following props:
+
+- `id` (required): unique element id used for the slider container and pagination/navigation selectors
+- `className`: additional classes applied to the root `.swiper` element
+- `options`: custom Swiper options merged with the defaults
+- `desktop`, `tablet`, `mobile`: number of slides visible at each breakpoint
+- `gap`: spacing between slides
+- `pagination`: enables pagination dots when `true`
+- `navigation`: enables previous and next buttons when `true`
+
+### Component behavior
+
+- The component creates the `.swiper-wrapper` and `.swiper-slide` structure automatically.
+- When `pagination` or `navigation` is enabled, it also renders the matching containers for those controls.
+- The component initializes Swiper on `DOMContentLoaded`, so it works well in standard page and layout setups.
+
+## Horizontal example
+
+```astro
+---
+import { Swiper, SwiperItem } from "../../components/swiper/index.ts";
+
+const slides = ["Slide 1", "Slide 2", "Slide 3"];
+---
+
+<Swiper
+  id="demo-slider"
+  desktop={3}
+  tablet={2}
+  mobile={1}
+  gap={20}
+  pagination
+  options={{ loop: true }}
+>
+  {slides.map((slide) => (
+    <SwiperItem>
+      <div class="rounded border border-gray-200 bg-gray-50 p-10">{slide}</div>
+    </SwiperItem>
+  ))}
+</Swiper>
+```
+
+## Vertical example
+
+Vertical sliders need a fixed height on the wrapper so the content has space to move:
+
+```astro
+---
+import { Swiper, SwiperItem } from "../../components/swiper/index.ts";
+
+const slides = ["Item 1", "Item 2", "Item 3"];
+---
+
+<Swiper
+  id="demo-slider-vertical"
+  className="h-[400px] w-full"
+  pagination
+  options={{
+    direction: "vertical",
+    autoplay: { delay: 4000, disableOnInteraction: false },
+  }}
+>
+  {slides.map((slide) => (
+    <SwiperItem>
+      <div class="flex h-full items-center justify-center bg-gray-100 p-6">
+        {slide}
+      </div>
+    </SwiperItem>
+  ))}
+</Swiper>
+```
+
+If Swiper is already loaded globally in your project, you can skip the CDN snippet and use the component directly.

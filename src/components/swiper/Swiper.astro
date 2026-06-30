@@ -1,0 +1,85 @@
+---
+interface Props {
+  id: string;
+  className?: string;
+  options?: object;
+  desktop?: number;
+  tablet?: number;
+  mobile?: number;
+  gap?: number;
+  pagination?: boolean | object;
+  navigation?: boolean | object;
+}
+
+const {
+  id,
+  className,
+  options = {},
+  desktop,
+  tablet,
+  mobile,
+  gap,
+  pagination = true,
+  navigation = false,
+} = Astro.props;
+
+
+const defaultOptions = {
+  loop: false,
+  autoplay: false,
+  slidesPerView: 1,
+  spaceBetween: gap || 0,
+  breakpoints: {
+    1024: {
+      slidesPerView: desktop || 1,
+      gap: gap || 0,
+    },
+    768: {
+      slidesPerView: tablet || 1,
+      gap: gap || 0,
+    },
+    0: {
+      slidesPerView: mobile || 1,
+      gap: gap || 0,
+    },
+  },
+  pagination: pagination ? {
+    el: `#${id} .swiper-pagination`,
+    clickable: true,
+    dynamicBullets: false,
+  } : undefined,
+  navigation: navigation ? {
+    nextEl: `#${id} .swiper-button-next`,
+    prevEl: `#${id} .swiper-button-prev`,
+  } : undefined,
+};
+
+const swiperOptions = {
+  ...defaultOptions,
+  ...options
+};
+
+
+
+---
+
+<div id={id} class="swiper" class:list={className}>
+  <div class="swiper-wrapper">
+    <slot />
+  </div>
+
+  {pagination && <div class="swiper-pagination" />}
+
+  {
+    navigation && (
+      <div class="swiper-button-prev" />
+      <div class="swiper-button-next" />
+    )
+  }
+</div>
+
+<script is:inline define:vars={{swiperOptions: swiperOptions, id: id}}>
+  window.addEventListener("DOMContentLoaded", () => {
+    new Swiper(`#${id}`, swiperOptions);
+  });
+</script>
